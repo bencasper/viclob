@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from wagtail.tests.testapp.models import LinkFields
 
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, FieldRowPanel, MultiFieldPanel, \
     InlinePanel, PageChooserPanel, StreamFieldPanel
+from wagtail.wagtailcore.blocks import RichTextBlock
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 
 class ContactFields(models.Model):
@@ -23,6 +26,65 @@ class ContactFields(models.Model):
         FieldPanel('city'),
         # FieldPanel('country'),
         FieldPanel('post_code'),
+    ]
+
+    class Meta:
+        abstract = True
+
+
+# Carousel items
+
+class CarouselItem(LinkFields):
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    embed_url = models.URLField(u'链接URL', blank=True)
+    caption = models.CharField(verbose_name=u'标题', max_length=255, blank=True)
+
+    panels = [
+        ImageChooserPanel('image'),
+        FieldPanel('embed_url'),
+        FieldPanel('caption'),
+        MultiFieldPanel(LinkFields.panels, "Link"),
+    ]
+
+    class Meta:
+        abstract = True
+
+
+class SubjectItem(models.Model):
+    title = models.CharField(verbose_name=u'主题', max_length=255)
+    desc = RichTextBlock(verbose_name=u'简介', icon="pilcrow")
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('desc'),
+        ImageChooserPanel('image')
+
+    ]
+
+    class Meta:
+        abstract = True
+
+
+# Related links
+class RelatedLink(LinkFields):
+    title = models.CharField(verbose_name=u'标题', max_length=255, help_text="Link title")
+
+    panels = [
+        FieldPanel('title'),
+        MultiFieldPanel(LinkFields.panels, "Link"),
     ]
 
     class Meta:
