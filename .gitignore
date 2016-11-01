@@ -1,3 +1,6 @@
-**/*.pyc
+home/*.pyc
+viclob/*.pyc
+viclob/**/*.*
 .idea/
 .idea/**/*.*
+migrations/

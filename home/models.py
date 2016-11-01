@@ -20,15 +20,16 @@ class HomePage(Page):
         verbose_name = u'首页'
 
 
-HomePage.content_pannels = [
-    MultiFieldPanel(SubjectItem.panels, u'咨询'),
-    MultiFieldPanel(SubjectItem.panels, u'服务'),
-    MultiFieldPanel(SubjectItem.panels, u'全网发型平台'),
-    MultiFieldPanel(SubjectItem.panels, u'案例'),
+HomePage.content_panels = [
+    InlinePanel('home_subject_items', label=u'页面板块内容简介'),
     InlinePanel('home_carousel_items', label=u"Carousel items"),
     InlinePanel('home_related_links', label=u"友情链接"),
 
 ]
+
+
+class HomePageSubjectItems(Orderable, TopicItem):
+    page = ParentalKey('home.HomePage', related_name='home_subject_items')
 
 
 class HomePageCarouselItem(Orderable, CarouselItem):
@@ -147,7 +148,7 @@ class VideoPlayPage(Page):
 VideoPlayPage.content_panels = [
     FieldPanel('title', classname='full title'),
     FieldPanel('desc', classname='full'),
-    FieldPanel('image', classname='full'),
+    ImageChooserPanel('image'),
     FieldPanel('video_code', classname='full')
 ]
 
@@ -158,6 +159,7 @@ class ImageShowPageCarouseItem(Orderable, CarouselItem):
 
 class ImageShowPage(ContentPage):
     InlinePanel('image_carousel_items', label="Carousel items"),
+
     class Meta:
         verbose_name = u'图片展示页'
 
@@ -203,6 +205,7 @@ class FormField(AbstractFormField):
 class FormPage(AbstractEmailForm):
     intro = RichTextField(verbose_name=u'简介', blank=True)
     thank_you_text = RichTextField(verbose_name=u'表单提交后提示语', blank=True)
+
 
 FormPage.content_panels = [
     FieldPanel('title', classname="full title"),

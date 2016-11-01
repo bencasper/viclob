@@ -5,6 +5,7 @@ from django.db import models
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, FieldRowPanel, MultiFieldPanel, \
     InlinePanel, PageChooserPanel, StreamFieldPanel
 from wagtail.wagtailcore.blocks import RichTextBlock
+from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
@@ -43,6 +44,7 @@ class LinkFields(models.Model):
 
     class Meta:
         abstract = True
+
 
 class ContactFields(models.Model):
     telephone = models.CharField(verbose_name=u'电话', max_length=20, blank=True)
@@ -90,9 +92,9 @@ class CarouselItem(LinkFields):
         abstract = True
 
 
-class SubjectItem(models.Model):
+class TopicItem(models.Model):
     title = models.CharField(verbose_name=u'主题', max_length=255)
-    desc = RichTextBlock(verbose_name=u'简介', icon="pilcrow")
+    desc = RichTextField(verbose_name=u'简介', blank=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -103,8 +105,8 @@ class SubjectItem(models.Model):
 
     panels = [
         FieldPanel('title'),
-        FieldPanel('desc'),
-        ImageChooserPanel('image')
+        FieldPanel('desc', classname='full'),
+        ImageChooserPanel('image'),
 
     ]
 
