@@ -1,13 +1,48 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-from wagtail.tests.testapp.models import LinkFields
 
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, FieldRowPanel, MultiFieldPanel, \
     InlinePanel, PageChooserPanel, StreamFieldPanel
 from wagtail.wagtailcore.blocks import RichTextBlock
+from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
+
+# A couple of abstract classes that contain commonly used fields
+
+class LinkFields(models.Model):
+    link_external = models.URLField("链接地址", blank=True)
+    link_page = models.ForeignKey(
+        'wagtailcore.Page',
+        null=True,
+        blank=True,
+        related_name='+'
+    )
+    link_document = models.ForeignKey(
+        'wagtaildocs.Document',
+        null=True,
+        blank=True,
+        related_name='+'
+    )
+
+    @property
+    def link(self):
+        if self.link_page:
+            return self.link_page.url
+        elif self.link_document:
+            return self.link_document.url
+        else:
+            return self.link_external
+
+    panels = [
+        FieldPanel('link_external'),
+        PageChooserPanel('link_page'),
+        DocumentChooserPanel('link_document'),
+    ]
+
+    class Meta:
+        abstract = True
 
 class ContactFields(models.Model):
     telephone = models.CharField(verbose_name=u'电话', max_length=20, blank=True)
@@ -33,7 +68,6 @@ class ContactFields(models.Model):
 
 
 # Carousel items
-
 class CarouselItem(LinkFields):
     image = models.ForeignKey(
         'wagtailimages.Image',

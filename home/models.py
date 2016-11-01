@@ -2,17 +2,13 @@
 
 from __future__ import absolute_import, unicode_literals
 
-from django.db import models
 from modelcluster.fields import ParentalKey
-from wagtail.tests.testapp.models import LinkFields
 from wagtail.wagtailcore.fields import RichTextField
-
 from wagtail.wagtailcore.models import Page, Orderable
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.wagtailforms.models import AbstractFormField, AbstractEmailForm
+from wagtail.wagtailsearch import index
 
 from home.Fields import *
-from django.db import models
-from wagtail.wagtailsearch import index
 
 # A couple of static contants
 
@@ -28,27 +24,29 @@ HomePage.content_pannels = [
     MultiFieldPanel(SubjectItem.panels, u'咨询'),
     MultiFieldPanel(SubjectItem.panels, u'服务'),
     MultiFieldPanel(SubjectItem.panels, u'全网发型平台'),
-    MultiFieldPanel(SubjectItem.panels, u'案例')
+    MultiFieldPanel(SubjectItem.panels, u'案例'),
+    InlinePanel('home_carousel_items', label=u"Carousel items"),
+    InlinePanel('home_related_links', label=u"友情链接"),
 
 ]
 
 
 class HomePageCarouselItem(Orderable, CarouselItem):
-    page = ParentalKey('home.HomePage', related_name='carousel_items')
+    page = ParentalKey('home.HomePage', related_name='home_carousel_items')
 
 
 class HomePageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('home.HomePage', related_name='related_links')
+    page = ParentalKey('home.HomePage', related_name='home_related_links')
 
 
 # Content page
 
 class ContentPageCarouselItem(Orderable, CarouselItem):
-    page = ParentalKey('home.ContentPage', related_name='carousel_items')
+    page = ParentalKey('home.ContentPage', related_name='content_carousel_items')
 
 
 class ContentPageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('home.ContentPage', related_name='related_links')
+    page = ParentalKey('home.ContentPage', related_name='content_related_links')
 
 
 class ContentPage(Page):
@@ -71,9 +69,9 @@ class ContentPage(Page):
 ContentPage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('intro', classname="full"),
-    InlinePanel('carousel_items', label="Carousel items"),
     FieldPanel('body', classname="full"),
-    InlinePanel('related_links', label="Related links"),
+    InlinePanel('content_carousel_items', label="Carousel items"),
+    InlinePanel('content_related_links', label=u"友情链接"),
 ]
 
 ContentPage.promote_panels = Page.promote_panels + [
@@ -128,11 +126,38 @@ class CaseIndexPage(ContentPage):
 
 
 class VideoPlayPage(Page):
+    desc = RichTextField(verbose_name=u'简介', blank=True)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    video_code = models.URLField(verbose_name=u'', max_length=255, blank=False)
+
+    search_fields = Page.search_fields + [
+        index.SearchField('title')
+    ]
+
     class Meta:
         verbose_name = u'播放页'
 
 
-class ImageShowPage(Page):
+VideoPlayPage.content_panels = [
+    FieldPanel('title', classname='full title'),
+    FieldPanel('desc', classname='full'),
+    FieldPanel('image', classname='full'),
+    FieldPanel('video_code', classname='full')
+]
+
+
+class ImageShowPageCarouseItem(Orderable, CarouselItem):
+    page = ParentalKey('home.ImageShowPage', related_name='image_carousel_items')
+
+
+class ImageShowPage(ContentPage):
+    InlinePanel('image_carousel_items', label="Carousel items"),
     class Meta:
         verbose_name = u'图片展示页'
 
@@ -168,4 +193,27 @@ ContactPage.content_panels = [
 
 ContactPage.promote_panels = Page.promote_panels + [
     ImageChooserPanel('feed_image'),
+]
+
+
+class FormField(AbstractFormField):
+    page = ParentalKey('FormPage', related_name='form_fields')
+
+
+class FormPage(AbstractEmailForm):
+    intro = RichTextField(verbose_name=u'简介', blank=True)
+    thank_you_text = RichTextField(verbose_name=u'表单提交后提示语', blank=True)
+
+FormPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    FieldPanel('intro', classname="full"),
+    InlinePanel('form_fields', label="表单字段"),
+    FieldPanel('thank_you_text', classname="full"),
+    # MultiFieldPanel([
+    #     FieldRowPanel([
+    #         FieldPanel('from_address', classname="col6"),
+    #         FieldPanel('to_address', classname="col6"),
+    #     ]),
+    #     FieldPanel('subject'),
+    # ], "Email"),
 ]
