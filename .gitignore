@@ -1,6 +1,6 @@
 home/*.pyc
 viclob/*.pyc
-viclob/**/*.*
+viclob/**/*.pyc
 .idea/
 .idea/**/*.*
 migrations/
