@@ -1,4 +1,5 @@
 home/*.pyc
+home/**/*.pyc
 viclob/*.pyc
 viclob/**/*.pyc
 .idea/
