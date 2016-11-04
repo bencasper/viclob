@@ -121,9 +121,11 @@ class ServiceIndexPage(Page):
     pass
 
 
-class CaseIndexPage(ContentPage):
+class CaseIndexPage(Page):
     class Meta:
-        verbose_name = u'案例展示'
+        verbose_name = u'案例首页'
+
+    pass    
 
 
 class VideoPlayPage(Page):
@@ -188,7 +190,7 @@ class ContactPage(Page, ContactFields):
 
 
 ContactPage.content_panels = [
-    # FieldPanel('title', classname="full title"),
+    FieldPanel('title', classname="full title"),
     FieldPanel('body', classname="full"),
     MultiFieldPanel(ContactFields.panels, u"联系方式"),
 ]
