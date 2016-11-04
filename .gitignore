@@ -3,4 +3,3 @@ viclob/*.pyc
 viclob/**/*.pyc
 .idea/
 .idea/**/*.*
-migrations/
