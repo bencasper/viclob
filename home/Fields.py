@@ -92,6 +92,19 @@ class CarouselItem(LinkFields):
         abstract = True
 
 
+class IndexItem(models.Model):
+    title = models.CharField(verbose_name=u'主题', max_length=255)
+
+    panels = [
+        FieldPanel('title'),
+
+    ]
+
+    class Meta:
+        abstract = True
+
+
+
 class TopicItem(models.Model):
     title = models.CharField(verbose_name=u'主题', max_length=255)
     desc = RichTextField(verbose_name=u'简介', blank=True)
