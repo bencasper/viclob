@@ -16,28 +16,29 @@ TECHES = ((1, u'基础'), (2, u'直播'), (3, u'点播'))
 
 
 class HomePage(Page):
+    entry_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
     class Meta:
-        verbose_name = u'首页'
+        verbose_name = u'入口页面'
 
 
 HomePage.content_panels = [
-    InlinePanel('home_subject_items', label=u'页面板块内容简介'),
-    InlinePanel('home_carousel_items', label=u"Carousel items"),
-    InlinePanel('home_related_links', label=u"友情链接"),
+    # image
+    ImageChooserPanel('entry_image'),
+    # index
+    InlinePanel('home_index_items', label=u'视频全媒体分发服务商'),
 
 ]
 
 
 class HomePageSubjectItems(Orderable, TopicItem):
-    page = ParentalKey('home.HomePage', related_name='home_subject_items')
-
-
-class HomePageCarouselItem(Orderable, CarouselItem):
-    page = ParentalKey('home.HomePage', related_name='home_carousel_items')
-
-
-class HomePageRelatedLink(Orderable, RelatedLink):
-    page = ParentalKey('home.HomePage', related_name='home_related_links')
+    page = ParentalKey('home.HomePage', related_name='home_index_items')
 
 
 # Content page
@@ -125,7 +126,7 @@ class CaseIndexPage(Page):
     class Meta:
         verbose_name = u'案例首页'
 
-    pass    
+    pass
 
 
 class VideoPlayPage(Page):
