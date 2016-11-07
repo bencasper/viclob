@@ -45,33 +45,33 @@ class FirstPage(Page):
 # home page
 FirstPage.content_panels = [
     FieldPanel('title', classname="full title"),
-    InlinePanel('home_distribute_items', label=u'视频全媒体分发'),
-    InlinePanel('home_cloud_items', label=u'视频云'),
-    InlinePanel('home_film_items', label=u'视频拍摄制作'),
-    InlinePanel('carousel_case_items', label="案例展示图"),
-    InlinePanel('carousel_partner_items', label="合作伙伴展示图"),
+    InlinePanel('business_carousel', label=u'业务内容展示图'),
+    InlinePanel('cloud_items', label=u'视频云资讯'),
+    InlinePanel('service_items', label=u'视频云服务'),
+    InlinePanel('case_carousel', label="作品展示图"),
+    InlinePanel('partner_carousel', label="合作伙伴展示图"),
 
 ]
 
 
-class FirstPageDistributeItems(Orderable, TopicItem):
-    page = ParentalKey('home.FirstPage', related_name='home_distribute_items')
+class FirstPageBusinessCarousel(Orderable, CarouselItem):
+    page = ParentalKey('home.FirstPage', related_name='business_carousel')
 
 
 class FirstPageCloudItems(Orderable, TopicItem):
-    page = ParentalKey('home.FirstPage', related_name='home_cloud_items')
+    page = ParentalKey('home.FirstPage', related_name='cloud_items')
 
 
-class FirstPageFilmItems(Orderable, TopicItem):
-    page = ParentalKey('home.FirstPage', related_name='home_film_items')
+class FirstPageServiceItems(Orderable, TopicItem):
+    page = ParentalKey('home.FirstPage', related_name='service_items')
 
 
-class FirstPageCaseItem(Orderable, CarouselItem):
-    page = ParentalKey('home.FirstPage', related_name='carousel_case_items')
+class FirstPageCaseCarousel(Orderable, CarouselItem):
+    page = ParentalKey('home.FirstPage', related_name='case_carousel')
 
 
-class FirstPagePartnerItems(Orderable, CarouselItem):
-    page = ParentalKey('home.FirstPage', related_name='carousel_partner_items')
+class FirstPagePartnerCarouse(Orderable, CarouselItem):
+    page = ParentalKey('home.FirstPage', related_name='partner_carousel')
 
 
 class ServiceIndexPage(Page):
@@ -79,83 +79,36 @@ class ServiceIndexPage(Page):
         verbose_name = u'服务首页'
 
 
-# 视频全媒体分发
-class DistributePage(Page):
+# 视频制作
+class VideoProduction(Page):
     class Meta:
-        verbose_name = u'视频全媒体分发'
+        verbose_name = u'视频制作'
 
 
-DistributePage.content_panels = [
+VideoProduction.content_panels = [
     FieldPanel('title', classname="full title"),
-    InlinePanel('oneClick_item', label=u'一键接入'),
-    InlinePanel('distribute_item', label=u'全媒体分发'),
-    InlinePanel('bigData_item', label=u'数据分析系统'),
-    InlinePanel('selfMedia_item', label=u'自频道运营推广'),
+    InlinePanel('introduce_items', label=u'业务介绍'),
 ]
 
 
-class DistributePageOneclickItem(Orderable, TopicItem):
-    page = ParentalKey('home.DistributePage', related_name='oneClick_item')
+class VideoProductionIntroduceItem(Orderable, TopicItem):
+    page = ParentalKey('home.VideoProduction', related_name='introduce_items')
 
 
-class DistributePageDistributeItem(Orderable, TopicItem):
-    page = ParentalKey('home.DistributePage', related_name='distribute_item')
-
-
-class DistributePageBigDataItem(Orderable, TopicItem):
-    page = ParentalKey('home.DistributePage', related_name='bigData_item')
-
-
-class DistributePageSelfMediaItem(Orderable, TopicItem):
-    page = ParentalKey('home.DistributePage', related_name='selfMedia_item')
-
-
-# 视频云
+# 视频云代理
 class CloudPage(Page):
     class Meta:
-        verbose_name = u'视频云服务'
+        verbose_name = u'视频云代理'
 
 
 CloudPage.content_panels = [
     FieldPanel('title', classname="full title"),
-    InlinePanel('news_item', label=u'视频云资讯'),
-    InlinePanel('ask_item', label=u'视频云询价'),
+    InlinePanel('introduce_items', label=u'业务介绍'),
 ]
 
 
 class CloudPageNewsItem(Orderable, TopicItem):
-    page = ParentalKey('home.CloudPage', related_name='news_item')
-
-
-class CloudPageAskItem(Orderable, TopicItem):
-    page = ParentalKey('home.CloudPage', related_name='ask_item')
-
-
-# 拍摄制作
-class FilmPage(Page):
-    class Meta:
-        verbose_name = u'视频拍摄制作'
-
-
-FilmPage.content_panels = [
-    FieldPanel('title', classname="full title"),
-    InlinePanel('film_item', label=u'视频拍摄制作'),
-    InlinePanel('loan_item', label=u'视频设备租赁'),
-    InlinePanel('partner_item', label=u'合作客户及作品列表'),
-
-]
-
-
-class FilmPageNewsItem(Orderable, TopicItem):
-    page = ParentalKey('home.FilmPage', related_name='film_item')
-
-
-class FilmLoanAskItem(Orderable, TopicItem):
-    page = ParentalKey('home.FilmPage', related_name='loan_item')
-
-
-class FilmPageAskItem(Orderable, TopicItem):
-    page = ParentalKey('home.FilmPage', related_name='partner_item')
+    page = ParentalKey('home.CloudPage', related_name='introduce_items')
 
 
 # 资讯首页
@@ -231,7 +184,7 @@ CaseNewsPage.content_panels = [
 
 class CaseIndexPage(Page):
     class Meta:
-        verbose_name = u'案例首页'
+        verbose_name = u'从业者首页'
 
 
 class CaseContentPage(Page):
@@ -240,7 +193,7 @@ class CaseContentPage(Page):
                                default=1)
 
     class Meta:
-        verbose_name = u'案例展示内容页'
+        verbose_name = u'从业者资讯内容页'
 
 
 CaseContentPage.content_panels = [

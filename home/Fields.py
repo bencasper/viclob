@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
+from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, FieldRowPanel, MultiFieldPanel, \
     InlinePanel, PageChooserPanel, StreamFieldPanel
 from wagtail.wagtailcore.blocks import RichTextBlock
 from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailcore.models import Orderable
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
@@ -102,7 +104,6 @@ class IndexItem(models.Model):
 
     class Meta:
         abstract = True
-
 
 
 class TopicItem(models.Model):
