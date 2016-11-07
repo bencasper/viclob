@@ -44,6 +44,7 @@ class FirstPage(Page):
 
 # home page
 FirstPage.content_panels = [
+    FieldPanel('title', classname="full title"),
     InlinePanel('home_distribute_items', label=u'视频全媒体分发'),
     InlinePanel('home_cloud_items', label=u'视频云'),
     InlinePanel('home_film_items', label=u'视频拍摄制作'),
@@ -78,13 +79,14 @@ class ServiceIndexPage(Page):
         verbose_name = u'服务首页'
 
 
-# 视频全媒体发布
+# 视频全媒体分发
 class DistributePage(Page):
     class Meta:
-        verbose_name = u'视频全媒体发布'
+        verbose_name = u'视频全媒体分发'
 
 
 DistributePage.content_panels = [
+    FieldPanel('title', classname="full title"),
     InlinePanel('oneClick_item', label=u'一键接入'),
     InlinePanel('distribute_item', label=u'全媒体分发'),
     InlinePanel('bigData_item', label=u'数据分析系统'),
@@ -115,7 +117,8 @@ class CloudPage(Page):
 
 
 CloudPage.content_panels = [
-    InlinePanel('news_item', label=u'视频云咨询'),
+    FieldPanel('title', classname="full title"),
+    InlinePanel('news_item', label=u'视频云资讯'),
     InlinePanel('ask_item', label=u'视频云询价'),
 ]
 
@@ -135,6 +138,7 @@ class FilmPage(Page):
 
 
 FilmPage.content_panels = [
+    FieldPanel('title', classname="full title"),
     InlinePanel('film_item', label=u'视频拍摄制作'),
     InlinePanel('loan_item', label=u'视频设备租赁'),
     InlinePanel('partner_item', label=u'合作客户及作品列表'),
@@ -154,15 +158,15 @@ class FilmPageAskItem(Orderable, TopicItem):
     page = ParentalKey('home.FilmPage', related_name='partner_item')
 
 
-# 咨询首页
+# 资讯首页
 class NewsIndexPage(Page):
     class Meta:
-        verbose_name = u'咨询首页'
+        verbose_name = u'资讯首页'
 
 
 class TechNewsIndexPage(Page):
     class Meta:
-        verbose_name = u'技术咨询首页'
+        verbose_name = u'技术资讯首页'
 
 
 class TechNewsPage(Page):
@@ -171,7 +175,7 @@ class TechNewsPage(Page):
                                default=1)
 
     class Meta:
-        verbose_name = u'咨询内容页'
+        verbose_name = u'资讯内容页'
 
 
 TechNewsPage.content_panels = [
@@ -278,7 +282,7 @@ class ContactPage(Page):
     ]
 
     class Meta:
-        verbose_name = u'联系我们'
+        verbose_name = u'关于我们'
 
 
 ContactPage.content_panels = [
