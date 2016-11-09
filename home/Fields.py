@@ -1,18 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-from modelcluster.fields import ParentalKey
 
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, FieldRowPanel, MultiFieldPanel, \
-    InlinePanel, PageChooserPanel, StreamFieldPanel
-from wagtail.wagtailcore.blocks import RichTextBlock
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
+    PageChooserPanel
 from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.models import Orderable
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
-
 # A couple of abstract classes that contain commonly used fields
+
 
 class LinkFields(models.Model):
     link_external = models.URLField("链接地址", blank=True)
@@ -127,6 +124,18 @@ class TopicItem(models.Model):
     class Meta:
         abstract = True
 
+#
+# class VideoItem(models.Model):
+#     video = models.ForeignKey(
+#         'wagtail_embed_videos.EmbedVideo',
+#         verbose_name="Video",
+#         null=True,
+#         blank=True,
+#         on_delete=models.SET_NULL,
+#         related_name='+'
+#     )
+#     panels = [EmbedVideoChooserPanel('video')]
+#
 
 # Related links
 class RelatedLink(LinkFields):
