@@ -1,9 +1,12 @@
+# -*- coding: utf-8 -*-
+
 from django import template
 from django.conf import settings
 from wagtail.wagtailcore.models import Page
 
-register = template.Library()
+from home.models import TechNewsIndexPage, NavigationPage
 
+register = template.Library()
 
 
 # settings value
@@ -12,11 +15,58 @@ def get_google_maps_key():
     return getattr(settings, 'GOOGLE_MAPS_KEY', "")
 
 
+@register.assignment_tag
+def vodNews():
+    return TechNewsIndexPage.objects.filter(techType=u'点播')
+
+
+@register.assignment_tag
+def techNews():
+    return TechNewsIndexPage.objects.filter(techType=u'直播')
+
+
+@register.assignment_tag
+def playerNews():
+    return TechNewsIndexPage.objects.filter(techType=u'播放器')
+
+
+@register.assignment_tag
+def cdnNews():
+    return TechNewsIndexPage.objects.filter(techType=u'CDN')
+
+@register.assignment_tag
+def codeNews():
+    return TechNewsIndexPage.objects.filter(techType=u'编解码')
+
+@register.assignment_tag
+def storeNews():
+    return TechNewsIndexPage.objects.filter(techType=u'存储')
+
+@register.assignment_tag
+def md5news():
+    return TechNewsIndexPage.objects.filter(techType=u'加密')
+
+@register.assignment_tag
+def securityNews():
+    return TechNewsIndexPage.objects.filter(techType=u'安全')
+
+
 @register.assignment_tag(takes_context=True)
 def get_site_root(context):
     # NB this returns a core.Page, not the implementation-specific model used
     # so object-comparison to self will return false as objects would differ
+    return context['request'].site.root_page.get_children()[0]
+
+@register.assignment_tag(takes_context=True)
+def get_home_page(context):
+    # NB this returns a core.Page, not the implementation-specific model used
+    # so object-comparison to self will return false as objects would differ
     return context['request'].site.root_page
+
+
+@register.assignment_tag(takes_context=True)
+def get_nav_page():
+    return Page.objects.get(title="")
 
 
 def has_menu_children(page):
@@ -30,6 +80,14 @@ def has_menu_children(page):
 def top_menu(context, parent, calling_page=None):
     menuitems = parent.get_children().live().in_menu()
     for menuitem in menuitems:
+        if menuitem.title == u'导航':
+            menuitem.fa = 'fa-paper-plane'
+        if menuitem.title == u'资讯':
+            menuitem.fa = 'fa-newspaper-o'
+        elif menuitem.title == u'服务':
+            menuitem.fa = 'fa-video-camera'
+        elif menuitem.title == u'联系我们':
+            menuitem.fa = 'fa-phone'
         menuitem.show_dropdown = has_menu_children(menuitem)
         # We don't directly check if calling_page is None since the template
         # engine can pass an empty string to calling_page
@@ -42,6 +100,21 @@ def top_menu(context, parent, calling_page=None):
         # required by the pageurl tag that we want to use within this template
         'request': context['request'],
     }
+
+@register.assignment_tag
+def get_top_menu():
+    menuitems = NavigationPage.objects.all().first().get_children().live().in_menu()
+    for menuitem in menuitems:
+        if menuitem.title == u'导航':
+            menuitem.fa = 'fa-paper-plane'
+        if menuitem.title == u'资讯':
+            menuitem.fa = 'fa-newspaper-o'
+        elif menuitem.title == u'服务':
+            menuitem.fa = 'fa-video-camera'
+        elif menuitem.title == u'联系我们':
+            menuitem.fa = 'fa-phone'
+        menuitem.show_dropdown = has_menu_children(menuitem)
+    return menuitems
 
 
 # Retrieves the children of the top menu items for the drop downs

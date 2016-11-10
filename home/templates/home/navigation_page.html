@@ -1,0 +1,42 @@
+{% extends "home/base.html" %}
+
+{% load viclob_tags wagtailcore_tags static %}
+
+
+{% block content %}
+{% get_site_root as site_root %}
+{% get_top_menu as menuitems %}
+
+<section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">At Your Service</h2>
+                <hr class="primary">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% for menuitem in menuitems %}
+                <div class="col-lg-4 col-md-6 text-center">
+                    <div class="service-box">
+                    <i class="fa fa-4x {{ menuitem.fa}} text-primary sr-icons"></i>
+
+                    <li class="{% if menuitem.show_dropdown %}dropdown{% endif %}{% if menuitem.active %} active{% endif %}">
+                        {% if menuitem.show_dropdown %}
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">{{ menuitem.title }} <b class="caret"></b></a>
+                            {% top_menu_children parent=menuitem %}
+
+                        {% else %}
+                            <a href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
+                        {% endif %}
+                    </li>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

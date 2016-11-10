@@ -15,12 +15,9 @@ body {
     padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
 }
 
-.img-portfolio {
-    margin-bottom: 30px;
-}
 
-.img-hover:hover {
-    opacity: 0.8;
+.text-primary {
+    color: #F05F40;
 }
 
 /* Home Page Carousel */
@@ -42,30 +39,27 @@ header.carousel .fill {
     background-size: cover;
 }
 
+/* Nav page Styles */
+
+section {
+    margin: auto auto;
+}
+
+.service-box {
+    margin: 20px auto 0;
+}
+.service-box {
+    max-width: 400px;
+    margin: 50px auto 0;
+}
+
+
 /* 404 Page Styles */
 
 .error-404 {
     font-size: 100px;
 }
 
-/* Pricing Page Styles */
-
-.price {
-    display: block;
-    font-size: 50px;
-    line-height: 50px;
-}
-
-.price sup {
-    top: -20px;
-    left: 2px;
-    font-size: 20px;
-}
-
-.period {
-    display: block;
-    font-style: italic;
-}
 
 /* Footer Styles */
 

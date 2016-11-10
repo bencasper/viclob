@@ -8,6 +8,7 @@ from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
+
 # A couple of abstract classes that contain commonly used fields
 
 
@@ -123,6 +124,31 @@ class TopicItem(models.Model):
 
     class Meta:
         abstract = True
+
+
+class VideoItem(models.Model):
+    title = models.CharField(verbose_name=u'标题', max_length=255)
+    content = RichTextField(verbose_name=u'视频内容', blank=True)
+    url = models.URLField(verbose_name=u'视频内容地址', blank=True)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=False,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('content', classname='full'),
+        FieldPanel('url'),
+        ImageChooserPanel('image'),
+
+    ]
+
+    class Meta:
+        abstract = True
+
 
 #
 # class VideoItem(models.Model):

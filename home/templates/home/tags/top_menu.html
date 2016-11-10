@@ -1,5 +1,6 @@
 {% load viclob_tags wagtailcore_tags %}
 {% get_site_root as site_root %}
+{% get_home_page as homepage %}
 
 {# Implementation of bootstrap theme dropdown menu - shows top level links and their children #}
 <div role="navigation" class="navbar navbar-inverse navbar-fixed-top">
@@ -12,7 +13,7 @@
                 <span class="icon-bar"></span>
             </button>
             {# Link to home page #}
-            <a href="{% pageurl site_root %}" class="navbar-brand" title="{{ site_root.title }}" data-placement="bottom">
+            <a href="{% pageurl homepage %}" class="navbar-brand" title="{{ homepage.title }}" data-placement="bottom">
                 <i class="glyphicon glyphicon-home"></i>
             </a>
         </div>

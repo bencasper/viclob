@@ -9,15 +9,8 @@ from wagtail.wagtailsearch import index
 
 from home.Fields import *
 
-# A couple of static contants
 
-TECH_TYPES = (
-(0, '请选择技术新闻类型'), (1, u'点播'), (2, u'直播'), (3, u'播放器'), (4, u'CDN'), (5, u'编解码'), (6, u'存储'), (7, u'加密'), (8, u'安全'))
-PROVIDER_TYPES = ((0, '请选择服务商新闻类型'), (1, u'阿里云'), (2, u'腾讯云'), (3, u'金山云'), (4, u'乐视云'), (5, u'七牛'))
-SECTOR_TYPES = ((0, '请选择行业新闻类型'), (1, u'政策'), (2, u'资本'), (3, u'会议'))
-CASE_TYPES = ((0, '请选择应用新闻类型'), (1, u'秀场'), (2, u'游戏'), (3, u'在线教育'), (4, u'新媒体'), (5, u'视频会议'), (6, u'监控'))
-PRACTITIONER_TYPES = (
-(0, '请选择从业者新闻类型'), (1, u'营销'), (2, u'市场'), (3, u'产品'), (4, u'运营'), (5, u'测试'), (6, u'开发'), (7, u'技术支持'))
+# A couple of static contants
 
 
 # entry page
@@ -81,12 +74,18 @@ class NavigationPage(Page):
 
 # service page
 class ServiceIndexPage(Page):
+    @property
+    def navItems(self):
+        return self.get_children()
+
     class Meta:
         verbose_name = u'服务首页'
 
 
 # 统一测试平台
 class TestPlatformPage(Page):
+    template = 'service_index_page.html'
+
     class Meta:
         verbose_name = u'统一测试平台页面'
 
@@ -108,7 +107,7 @@ class VideoProductionIntroduceItem(Orderable, TopicItem):
     page = ParentalKey('home.VideoProduction', related_name='introduce_items')
 
 
-class VideoProductionIntroduceItem(Orderable, TopicItem):
+class VideoProductionIntroduceItem(Orderable, VideoItem):
     page = ParentalKey('home.VideoProduction', related_name='video_items')
 
 
@@ -126,6 +125,15 @@ class VideoProductionIntroduceItem(Orderable, TopicItem):
 #
 # class CloudPageNewsItem(Orderable, TopicItem):
 #     page = ParentalKey('home.CloudPage', related_name='introduce_items')
+
+
+TECH_TYPES = (
+    (0, '请选择技术新闻类型'), (1, u'点播'), (2, u'直播'), (3, u'播放器'), (4, u'CDN'), (5, u'编解码'), (6, u'存储'), (7, u'加密'), (8, u'安全'))
+PROVIDER_TYPES = ((0, '请选择服务商新闻类型'), (1, u'阿里云'), (2, u'腾讯云'), (3, u'金山云'), (4, u'乐视云'), (5, u'七牛'))
+SECTOR_TYPES = ((0, '请选择行业新闻类型'), (1, u'政策'), (2, u'资本'), (3, u'会议'))
+CASE_TYPES = ((0, '请选择应用新闻类型'), (1, u'秀场'), (2, u'游戏'), (3, u'在线教育'), (4, u'新媒体'), (5, u'视频会议'), (6, u'监控'))
+PRACTITIONER_TYPES = (
+    (0, '请选择从业者新闻类型'), (1, u'营销'), (2, u'市场'), (3, u'产品'), (4, u'运营'), (5, u'测试'), (6, u'开发'), (7, u'技术支持'))
 
 
 # 资讯内容页
@@ -165,26 +173,118 @@ class NewsIndexPage(Page):
 
 
 class TechNewsIndexPage(Page):
+    template = 'news_index_page.html'
+
     class Meta:
         verbose_name = u'技术资讯首页'
 
 
 class ProviderNewsIndexPage(Page):
+    # PROVIDER_TYPES = ((0, '请选择服务商新闻类型'), (1, u'阿里云'), (2, u'腾讯云'), (3, u'金山云'), (4, u'乐视云'), (5, u'七牛'))
+    @property
+    def aliCloud(self):
+        return self.objects.filter(providerType=u'阿里云')
+
+    @property
+    def tencentCloud(self):
+        return self.objects.filter(providerType=u'腾讯云')
+
+    @property
+    def kingCloud(self):
+        return self.objects.filter(providerType=u'金山云')
+
+    @property
+    def leCloud(self):
+        return self.objects.filter(providerType=u'乐视云')
+
+    @property
+    def qiniuCloud(self):
+        return self.objects.filter(providerType=u'七牛')
+
     class Meta:
         verbose_name = u'服务商首页'
 
 
 class SectorNewsIndexPage(Page):
+    # SECTOR_TYPES = ((0, '请选择行业新闻类型'), (1, u'政策'), (2, u'资本'), (3, u'会议'))
+
+    @property
+    def policy(self):
+        return self.objects.filter(providerType=u'政策')
+
+    @property
+    def capital(self):
+        return self.objects.filter(providerType=u'资本')
+
+    @property
+    def conference(self):
+        return self.objects.filter(providerType=u'会议')
+
     class Meta:
         verbose_name = u'行业首页'
 
 
 class CaseNewsIndexPage(Page):
+    # CASE_TYPES = ((0, '请选择应用新闻类型'), (1, u'秀场'), (2, u'游戏'), (3, u'在线教育'), (4, u'新媒体'), (5, u'视频会议'), (6, u'监控'))
+
+    @property
+    def show(self):
+        return self.objects.filter(providerType=u'秀场')
+
+    @property
+    def game(self):
+        return self.objects.filter(providerType=u'游戏')
+
+    @property
+    def edu(self):
+        return self.objects.filter(providerType=u'在线教育')
+
+    @property
+    def media(self):
+        return self.objects.filter(providerType=u'新媒体')
+
+    @property
+    def videoConference(self):
+        return self.objects.filter(providerType=u'视频会议')
+
+    @property
+    def monitor(self):
+        return self.objects.filter(providerType=u'监控')
+
     class Meta:
         verbose_name = u'应用首页'
 
 
 class PractitionerIndexPage(Page):
+    # PRACTITIONER_TYPES = ((0, '请选择从业者新闻类型'), (1, u'营销'), (2, u'市场'), (3, u'产品'), (4, u'运营'), (5, u'测试'), (6, u'开发'), (7, u'技术支持'))
+    @property
+    def sell(self):
+        return self.objects.filter(providerType=u'营销')
+
+    @property
+    def market(self):
+        return self.objects.filter(providerType=u'市场')
+
+    @property
+    def production(self):
+        return self.objects.filter(providerType=u'产品')
+
+    @property
+    def operations(self):
+        return self.objects.filter(providerType=u'运营')
+
+    @property
+    def testing(self):
+        return self.objects.filter(providerType=u'测试')
+
+    @property
+    def developing(self):
+        return self.objects.filter(providerType=u'开发')
+
+    @property
+    def supplying(self):
+        return self.objects.filter(providerType=u'技术支持')
+
     class Meta:
         verbose_name = u'从业者首页'
 
