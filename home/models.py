@@ -173,8 +173,6 @@ class NewsIndexPage(Page):
 
 
 class TechNewsIndexPage(Page):
-    template = 'news_index_page.html'
-
     class Meta:
         verbose_name = u'技术资讯首页'
 

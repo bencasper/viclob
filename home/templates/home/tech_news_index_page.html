@@ -1,0 +1,133 @@
+{% extends "home/base.html" %}
+{% load viclob_tags wagtailcore_tags static %}
+
+
+{% block content %}
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Page Heading/Breadcrumbs -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">技术
+            </h1>
+            {% breadcrumbs %}
+        </div>
+    </div>
+    <!-- /.row -->
+
+
+    <!-- Service Tabs -->
+    <div class="row">
+
+        <div class="col-lg-3">
+            <div>
+                <h2 class="page-header"></h2>
+            </div>
+            <div>
+                <ul class="nav nav-tabs nav-justified">
+                    <li><i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
+                    </li>
+                </ul>
+                <ul>
+                    <li>技术</li>
+                    <li>服务商</li>
+                    <li>行业</li>
+                    <li>引用</li>
+                    <li>从业者</li>
+
+                </ul>
+            </div>
+
+        </div>
+        <div class="col-lg-9>">
+
+            <div class="col-lg-9">
+                <h2 class="page-header"></h2>
+            </div>
+            <div class="col-lg-9">
+
+                <ul id="myTab" class="nav nav-tabs nav-justified">
+                    <li class="active"><a href="#service-one" data-toggle="tab"><i class="fa fa-tree"></i> Service
+                        One</a>
+                    </li>
+                    <li class=""><a href="#service-two" data-toggle="tab"><i class="fa fa-car"></i> Service Two</a>
+                    </li>
+                    <li class=""><a href="#service-three" data-toggle="tab"><i class="fa fa-support"></i> Service Three</a>
+                    </li>
+                    <li class=""><a href="#service-four" data-toggle="tab"><i class="fa fa-database"></i> Service
+                        Four</a>
+                    </li>
+                </ul>
+
+                <div id="myTabContent" class="tab-content">
+                    <div class="tab-pane fade active in" id="service-one">
+                        <h4>Service One</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo
+                            cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus
+                            velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe
+                            facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat
+                            asperiores.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo
+                            cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus
+                            velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe
+                            facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat
+                            asperiores.</p>
+                    </div>
+                    <div class="tab-pane fade" id="service-two">
+                        <h4>Service Two</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo
+                            cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus
+                            velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe
+                            facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat
+                            asperiores.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo
+                            cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus
+                            velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe
+                            facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat
+                            asperiores.</p>
+                    </div>
+                    <div class="tab-pane fade" id="service-three">
+                        <h4>Service Three</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo
+                            cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus
+                            velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe
+                            facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat
+                            asperiores.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo
+                            cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus
+                            velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe
+                            facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat
+                            asperiores.</p>
+                    </div>
+                    <div class="tab-pane fade" id="service-four">
+                        <h4>Service Four</h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo
+                            cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus
+                            velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe
+                            facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat
+                            asperiores.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo
+                            cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus
+                            velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet,
+                            consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe
+                            facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat
+                            asperiores.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    {% endblock %}
+
