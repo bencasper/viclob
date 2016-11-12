@@ -4,7 +4,7 @@ from django import template
 from django.conf import settings
 from wagtail.wagtailcore.models import Page
 
-from home.models import TechNewsIndexPage, NavigationPage, NewsIndexPage, NewsContentPage
+from home.models import TechNewsIndexPage, NavigationPage, NewsIndexPage, NewsContentPage, ServiceIndexPage
 
 register = template.Library()
 
@@ -31,6 +31,19 @@ def get_news_types():
             news_type.fa = 'fa-user'
 
     return news_types
+
+@register.assignment_tag
+def get_service_types():
+    service_types = ServiceIndexPage.objects.all()[0].get_children()
+
+    for service_type in service_types:
+        if service_type.title == u'统一测试平台':
+            service_type.fa = 'fa-try'
+        elif service_type.title == u'拍摄制作':
+            service_type.fa = 'fa-film'
+
+    return service_types
+
 
 
 @register.assignment_tag

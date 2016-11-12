@@ -6,6 +6,7 @@ from django.db.models import Q
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import InlinePanel
 from wagtail.wagtailcore.models import Page, Orderable
+from wagtail.wagtailcore.url_routing import RouteResult
 from wagtail.wagtailsearch import index
 
 from home.Fields import *
@@ -16,6 +17,11 @@ from home.Fields import *
 
 # entry page
 class HomePage(Page):
+    @property
+    def get_nav_page(self):
+        print NavigationPage.objects.all()[0]
+        return NavigationPage.objects.all()[0]
+
     class Meta:
         verbose_name = u'入口页面'
 
@@ -75,9 +81,7 @@ class NavigationPage(Page):
 
 # service page
 class ServiceIndexPage(Page):
-    @property
-    def navItems(self):
-        return self.get_children()
+    template = 'test_platform_page.html'
 
     class Meta:
         verbose_name = u'服务首页'
@@ -85,8 +89,6 @@ class ServiceIndexPage(Page):
 
 # 统一测试平台
 class TestPlatformPage(Page):
-    template = 'service_index_page.html'
-
     class Meta:
         verbose_name = u'统一测试平台页面'
 
@@ -169,6 +171,18 @@ NewsContentPage.content_panels = [
 
 # 资讯首页
 class NewsIndexPage(Page):
+    # def route(self, request, path_components):
+    #     return RouteResult(TechNewsIndexPage.objects.all()[0], kwargs={'path_components': path_components})
+    @property
+    def subNewsTypes(self):
+        return TECH_TYPES
+
+    @property
+    def contentList(self):
+        return NewsContentPage.objects.filter(~Q(techType=0)).order_by('latest_revision_created_at')[:10]
+
+    template = 'home/tech_news_index_page.html'
+
     class Meta:
         verbose_name = u'资讯首页'
 
@@ -213,6 +227,7 @@ class SectorNewsIndexPage(Page):
     @property
     def contentList(self):
         return NewsContentPage.objects.filter(~Q(sectorType=0)).order_by('latest_revision_created_at')[:10]
+
     template = 'home/tech_news_index_page.html'
 
     class Meta:
@@ -229,6 +244,7 @@ class CaseNewsIndexPage(Page):
     @property
     def contentList(self):
         return NewsContentPage.objects.filter(~Q(caseType=0)).order_by('latest_revision_created_at')[:10]
+
     template = 'home/tech_news_index_page.html'
 
     class Meta:
@@ -245,6 +261,7 @@ class PractitionerIndexPage(Page):
     @property
     def contentList(self):
         return NewsContentPage.objects.filter(~Q(practitionerType=0)).order_by('latest_revision_created_at')[:10]
+
     template = 'home/tech_news_index_page.html'
 
     class Meta:

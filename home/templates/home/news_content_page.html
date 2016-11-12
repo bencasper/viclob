@@ -4,6 +4,8 @@
 {% block content %}
 
 
+<!-- Page Content -->
+<div class="container">
 
     <!-- Page Content -->
     <div class="container">
@@ -11,61 +13,43 @@
         <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Sidebar Page
-                    <small>Subheading</small>
+                <h1 class="page-header">{{ self}}
                 </h1>
-                <ol class="breadcrumb">
-                    <li><a href="index.html">Home</a>
-                    </li>
-                    <li class="active">Sidebar Page</li>
-                </ol>
+                {% breadcrumbs %}
             </div>
         </div>
         <!-- /.row -->
 
+
+        <!-- /.row -->
+
         <!-- Content Row -->
         <div class="row">
-            <!-- Sidebar Column -->
-            <div class="col-md-3">
-                <div class="list-group">
-                    <a href="index.html" class="list-group-item">Home</a>
-                    <a href="about.html" class="list-group-item">About</a>
-                    <a href="services.html" class="list-group-item">Services</a>
-                    <a href="contact.html" class="list-group-item">Contact</a>
-                    <a href="portfolio-1-col.html" class="list-group-item">1 Column Portfolio</a>
-                    <a href="portfolio-2-col.html" class="list-group-item">2 Column Portfolio</a>
-                    <a href="portfolio-3-col.html" class="list-group-item">3 Column Portfolio</a>
-                    <a href="portfolio-4-col.html" class="list-group-item">4 Column Portfolio</a>
-                    <a href="portfolio-item.html" class="list-group-item">Single Portfolio Item</a>
-                    <a href="blog-home-1.html" class="list-group-item">Blog Home 1</a>
-                    <a href="blog-home-2.html" class="list-group-item">Blog Home 2</a>
-                    <a href="blog-post.html" class="list-group-item">Blog Post</a>
-                    <a href="full-width.html" class="list-group-item">Full Width Page</a>
-                    <a href="sidebar.html" class="list-group-item active">Sidebar Page</a>
-                    <a href="faq.html" class="list-group-item">FAQ</a>
-                    <a href="404.html" class="list-group-item">404</a>
-                    <a href="pricing.html" class="list-group-item">Pricing Table</a>
-                </div>
-            </div>
+
             <!-- Content Column -->
             <div class="col-md-9">
-                <h2>Section Heading</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta, et temporibus, facere perferendis veniam beatae non debitis, numquam blanditiis necessitatibus vel mollitia dolorum laudantium, voluptate dolores iure maxime ducimus fugit.</p>
+                <h2>{{ self.title}}</h2>
+
+
+                <p> {{ self.body | richtext }} </p>
+
             </div>
         </div>
         <!-- /.row -->
 
         <hr>
 
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-        </footer>
-
     </div>
-    <!-- /.container -->
+    <!-- JiaThis Button BEGIN -->
+    <div id="ckepop">
+        <span class="jiathis_txt">分享到：</span>
+        <a class="jiathis_button_weixin">微信</a>
+        <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
+           target="_blank">更多</a>
+        <a class="jiathis_counter_style"></a></div>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1" charset="utf-8"></script>
+</div> <!-- JiaThis Button END -->
+
+</div>
+<!-- /.container -->
 {% endblock %}
