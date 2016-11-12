@@ -3,7 +3,7 @@
 
 
 {% block content %}
-
+{% get_news_types as newsTypes%}
 <!-- Page Content -->
 <div class="container">
 
@@ -27,17 +27,22 @@
             </div>
             <div>
                 <ul class="nav nav-tabs nav-justified">
-                    <li><i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
+                    <li><i class="fa fa-4x fa-flag text-primary sr-icons"></i>
                     </li>
                 </ul>
-                <ul>
-                    <li>技术</li>
-                    <li>服务商</li>
-                    <li>行业</li>
-                    <li>引用</li>
-                    <li>从业者</li>
 
-                </ul>
+
+                {% if newsTypes %}
+                <div class="list-group">
+                    {% for newsType in newsTypes %}
+                    <a href="{% pageurl newsType %}" class="list-group-item list-group-item-action">
+                        <i class=" fa {{newsType.fa}}"></i>
+                        {{ newsType.title}}
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
             </div>
 
         </div>
@@ -49,85 +54,50 @@
             <div class="col-lg-9">
 
                 <ul id="myTab" class="nav nav-tabs nav-justified">
-                    <li class="active"><a href="#service-one" data-toggle="tab"><i class="fa fa-tree"></i> Service
-                        One</a>
+                    {% for newsType in self.subNewsTypes %}
+                    {% if forloop.counter0 != 0%}
+                    <li class="{% if forloop.counter0 == 1 %}active{%endif%}"><a href="#service-{{ forloop.counter0 }}"
+                                                                                 data-toggle="tab"><i class="fa "></i>
+                        {{newsType.1}}
+                    </a>
                     </li>
-                    <li class=""><a href="#service-two" data-toggle="tab"><i class="fa fa-car"></i> Service Two</a>
-                    </li>
-                    <li class=""><a href="#service-three" data-toggle="tab"><i class="fa fa-support"></i> Service Three</a>
-                    </li>
-                    <li class=""><a href="#service-four" data-toggle="tab"><i class="fa fa-database"></i> Service
-                        Four</a>
-                    </li>
+                    {% endif %}
+                    {% endfor %}
                 </ul>
 
                 <div id="myTabContent" class="tab-content">
-                    <div class="tab-pane fade active in" id="service-one">
-                        <h4>Service One</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo
-                            cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus
-                            velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet,
-                            consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe
-                            facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat
-                            asperiores.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo
-                            cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus
-                            velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet,
-                            consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe
-                            facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat
-                            asperiores.</p>
+
+                    {% for newsType in self.subNewsTypes %}
+
+                    {% if forloop.counter0 != 0%}
+                    <div class="tab-pane fade {% if forloop.counter0 == 1 %}active{%endif%} in"
+                         id="service-{{forloop.counter0}}">
+                        <ul class="list-unstyled">
+                            {% if self.contentList %}
+                            {% for content in self.contentList%}
+                            {% if content.techType == newsType.0 %}
+                            <a href="{% pageurl content %}" class="">
+                                <i class=" fa "></i>
+                                <li>
+                                    <span style="padding-left:10%; padding-right:40%">{{ content.title}}</span>
+                                    <span>发布于 {{ content.latest_revision_created_at | date:" Y-m-d P"}}
+                                    </span>
+                                </li>
+                            </a>
+                            {% endif %}
+                            {% endfor%}
+                            {% endif %}
+                        </ul>
                     </div>
-                    <div class="tab-pane fade" id="service-two">
-                        <h4>Service Two</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo
-                            cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus
-                            velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet,
-                            consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe
-                            facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat
-                            asperiores.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo
-                            cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus
-                            velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet,
-                            consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe
-                            facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat
-                            asperiores.</p>
-                    </div>
-                    <div class="tab-pane fade" id="service-three">
-                        <h4>Service Three</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo
-                            cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus
-                            velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet,
-                            consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe
-                            facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat
-                            asperiores.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo
-                            cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus
-                            velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet,
-                            consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe
-                            facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat
-                            asperiores.</p>
-                    </div>
-                    <div class="tab-pane fade" id="service-four">
-                        <h4>Service Four</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo
-                            cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus
-                            velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet,
-                            consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe
-                            facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat
-                            asperiores.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae repudiandae fugiat illo
-                            cupiditate excepturi esse officiis consectetur, laudantium qui voluptatem. Ad necessitatibus
-                            velit, accusantium expedita debitis impedit rerum totam id. Lorem ipsum dolor sit amet,
-                            consectetur adipisicing elit. Natus quibusdam recusandae illum, nesciunt, architecto, saepe
-                            facere, voluptas eum incidunt dolores magni itaque autem neque velit in. At quia quaerat
-                            asperiores.</p>
-                    </div>
+                    {% endif %}
+                    {% endfor %}
+
                 </div>
 
             </div>
         </div>
     </div>
 
-
-    {% endblock %}
+</div>
+{% endblock %}
 

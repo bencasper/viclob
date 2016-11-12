@@ -4,7 +4,7 @@ from django import template
 from django.conf import settings
 from wagtail.wagtailcore.models import Page
 
-from home.models import TechNewsIndexPage, NavigationPage
+from home.models import TechNewsIndexPage, NavigationPage, NewsIndexPage, NewsContentPage
 
 register = template.Library()
 
@@ -16,39 +16,61 @@ def get_google_maps_key():
 
 
 @register.assignment_tag
-def vodNews():
-    return TechNewsIndexPage.objects.filter(techType=u'点播')
+def get_news_types():
+    news_types = NewsIndexPage.objects.all()[0].get_children()
+    for news_type in news_types:
+        if news_type.title == u'技术':
+            news_type.fa = 'fa-list'
+        elif news_type.title == u'服务商':
+            news_type.fa = 'fa-cloud'
+        elif news_type.title == u'行业':
+            news_type.fa = 'fa-film'
+        elif news_type.title == u'应用':
+            news_type.fa = 'fa-video-camera'
+        elif news_type.title == u'从业者':
+            news_type.fa = 'fa-user'
+
+    return news_types
 
 
 @register.assignment_tag
-def techNews():
-    return TechNewsIndexPage.objects.filter(techType=u'直播')
+def get_vod_news():
+    return NewsContentPage.objects.filter(techType=u'点播')
 
 
 @register.assignment_tag
-def playerNews():
-    return TechNewsIndexPage.objects.filter(techType=u'播放器')
+def get_tech_news():
+    return NewsContentPage.objects.filter(techType=u'直播')
 
 
 @register.assignment_tag
-def cdnNews():
-    return TechNewsIndexPage.objects.filter(techType=u'CDN')
+def get_player_news():
+    return NewsContentPage.objects.filter(techType=u'播放器')
+
 
 @register.assignment_tag
-def codeNews():
-    return TechNewsIndexPage.objects.filter(techType=u'编解码')
+def get_cdn_news():
+    return NewsContentPage.objects.filter(techType=u'CDN')
+
 
 @register.assignment_tag
-def storeNews():
-    return TechNewsIndexPage.objects.filter(techType=u'存储')
+def get_code_news():
+    return NewsContentPage.objects.filter(techType=u'编解码')
+
 
 @register.assignment_tag
-def md5news():
-    return TechNewsIndexPage.objects.filter(techType=u'加密')
+def get_store_news():
+    return NewsContentPage.objects.filter(techType=u'存储')
+
 
 @register.assignment_tag
-def securityNews():
-    return TechNewsIndexPage.objects.filter(techType=u'安全')
+def get_md5_news():
+    return NewsContentPage.objects.filter(techType=u'加密')
+
+
+@register.assignment_tag
+def get_security_news():
+    return NewsContentPage.objects.filter(techType=u'安全')
 
 
 @register.assignment_tag(takes_context=True)
@@ -56,6 +78,7 @@ def get_site_root(context):
     # NB this returns a core.Page, not the implementation-specific model used
     # so object-comparison to self will return false as objects would differ
     return context['request'].site.root_page.get_children()[0]
+
 
 @register.assignment_tag(takes_context=True)
 def get_home_page(context):
@@ -100,6 +123,7 @@ def top_menu(context, parent, calling_page=None):
         # required by the pageurl tag that we want to use within this template
         'request': context['request'],
     }
+
 
 @register.assignment_tag
 def get_top_menu():

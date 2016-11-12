@@ -2,6 +2,7 @@
 
 from __future__ import absolute_import, unicode_literals
 
+from django.db.models import Q
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import InlinePanel
 from wagtail.wagtailcore.models import Page, Orderable
@@ -173,31 +174,30 @@ class NewsIndexPage(Page):
 
 
 class TechNewsIndexPage(Page):
+    @property
+    def subNewsTypes(self):
+        return TECH_TYPES
+
+    @property
+    def contentList(self):
+        return NewsContentPage.objects.filter(~Q(techType=0)).order_by('latest_revision_created_at')[:10]
+
     class Meta:
         verbose_name = u'技术资讯首页'
 
 
 class ProviderNewsIndexPage(Page):
     # PROVIDER_TYPES = ((0, '请选择服务商新闻类型'), (1, u'阿里云'), (2, u'腾讯云'), (3, u'金山云'), (4, u'乐视云'), (5, u'七牛'))
-    @property
-    def aliCloud(self):
-        return self.objects.filter(providerType=u'阿里云')
 
     @property
-    def tencentCloud(self):
-        return self.objects.filter(providerType=u'腾讯云')
+    def subNewsTypes(self):
+        return PROVIDER_TYPES
 
     @property
-    def kingCloud(self):
-        return self.objects.filter(providerType=u'金山云')
+    def contentList(self):
+        return NewsContentPage.objects.filter(~Q(providerType=0)).order_by('latest_revision_created_at')[:10]
 
-    @property
-    def leCloud(self):
-        return self.objects.filter(providerType=u'乐视云')
-
-    @property
-    def qiniuCloud(self):
-        return self.objects.filter(providerType=u'七牛')
+    template = 'home/tech_news_index_page.html'
 
     class Meta:
         verbose_name = u'服务商首页'
@@ -207,16 +207,13 @@ class SectorNewsIndexPage(Page):
     # SECTOR_TYPES = ((0, '请选择行业新闻类型'), (1, u'政策'), (2, u'资本'), (3, u'会议'))
 
     @property
-    def policy(self):
-        return self.objects.filter(providerType=u'政策')
+    def subNewsTypes(self):
+        return SECTOR_TYPES
 
     @property
-    def capital(self):
-        return self.objects.filter(providerType=u'资本')
-
-    @property
-    def conference(self):
-        return self.objects.filter(providerType=u'会议')
+    def contentList(self):
+        return NewsContentPage.objects.filter(~Q(sectorType=0)).order_by('latest_revision_created_at')[:10]
+    template = 'home/tech_news_index_page.html'
 
     class Meta:
         verbose_name = u'行业首页'
@@ -226,28 +223,13 @@ class CaseNewsIndexPage(Page):
     # CASE_TYPES = ((0, '请选择应用新闻类型'), (1, u'秀场'), (2, u'游戏'), (3, u'在线教育'), (4, u'新媒体'), (5, u'视频会议'), (6, u'监控'))
 
     @property
-    def show(self):
-        return self.objects.filter(providerType=u'秀场')
+    def subNewsTypes(self):
+        return CASE_TYPES
 
     @property
-    def game(self):
-        return self.objects.filter(providerType=u'游戏')
-
-    @property
-    def edu(self):
-        return self.objects.filter(providerType=u'在线教育')
-
-    @property
-    def media(self):
-        return self.objects.filter(providerType=u'新媒体')
-
-    @property
-    def videoConference(self):
-        return self.objects.filter(providerType=u'视频会议')
-
-    @property
-    def monitor(self):
-        return self.objects.filter(providerType=u'监控')
+    def contentList(self):
+        return NewsContentPage.objects.filter(~Q(caseType=0)).order_by('latest_revision_created_at')[:10]
+    template = 'home/tech_news_index_page.html'
 
     class Meta:
         verbose_name = u'应用首页'
@@ -255,33 +237,15 @@ class CaseNewsIndexPage(Page):
 
 class PractitionerIndexPage(Page):
     # PRACTITIONER_TYPES = ((0, '请选择从业者新闻类型'), (1, u'营销'), (2, u'市场'), (3, u'产品'), (4, u'运营'), (5, u'测试'), (6, u'开发'), (7, u'技术支持'))
-    @property
-    def sell(self):
-        return self.objects.filter(providerType=u'营销')
 
     @property
-    def market(self):
-        return self.objects.filter(providerType=u'市场')
+    def subNewsTypes(self):
+        return PRACTITIONER_TYPES
 
     @property
-    def production(self):
-        return self.objects.filter(providerType=u'产品')
-
-    @property
-    def operations(self):
-        return self.objects.filter(providerType=u'运营')
-
-    @property
-    def testing(self):
-        return self.objects.filter(providerType=u'测试')
-
-    @property
-    def developing(self):
-        return self.objects.filter(providerType=u'开发')
-
-    @property
-    def supplying(self):
-        return self.objects.filter(providerType=u'技术支持')
+    def contentList(self):
+        return NewsContentPage.objects.filter(~Q(practitionerType=0)).order_by('latest_revision_created_at')[:10]
+    template = 'home/tech_news_index_page.html'
 
     class Meta:
         verbose_name = u'从业者首页'
