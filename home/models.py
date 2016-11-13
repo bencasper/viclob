@@ -6,7 +6,7 @@ from django.db.models import Q
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import InlinePanel
 from wagtail.wagtailcore.models import Page, Orderable
-from wagtail.wagtailcore.url_routing import RouteResult
+from wagtail.wagtailforms.models import AbstractFormField, AbstractForm
 from wagtail.wagtailsearch import index
 
 from home.Fields import *
@@ -308,25 +308,27 @@ ContactPage.content_panels = [
 
 
 
-# class FormField(AbstractFormField):
-#     page = ParentalKey('FormPage', related_name='form_fields')
-#
-#
-# class FormPage(AbstractEmailForm):
-#     intro = RichTextField(verbose_name=u'简介', blank=True)
-#     thank_you_text = RichTextField(verbose_name=u'表单提交后提示语', blank=True)
-#
-#
-# FormPage.content_panels = [
-#     FieldPanel('title', classname="full title"),
-#     FieldPanel('intro', classname="full"),
-#     InlinePanel('form_fields', label="表单字段"),
-#     FieldPanel('thank_you_text', classname="full"),
-#     # MultiFieldPanel([
-#     #     FieldRowPanel([
-#     #         FieldPanel('from_address', classname="col6"),
-#     #         FieldPanel('to_address', classname="col6"),
-#     #     ]),
-#     #     FieldPanel('subject'),
-#     # ], "Email"),
-# ]
+class FormField(AbstractFormField):
+    page = ParentalKey('FormPage', related_name='form_fields')
+
+
+class FormPage(AbstractForm):
+    intro = RichTextField(verbose_name=u'简介', blank=True)
+    thank_you_text = RichTextField(verbose_name=u'表单提交后提示语', blank=True)
+
+
+FormPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    FieldPanel('intro', classname="full"),
+    InlinePanel('form_fields', label="表单字段"),
+    FieldPanel('thank_you_text', classname="full"),
+    # MultiFieldPanel([
+    #     FieldRowPanel([
+    #         FieldPanel('from_address', classname="col6"),
+    #         FieldPanel('to_address', classname="col6"),
+    #     ]),
+    #     FieldPanel('subject'),
+    # ], "Email"),
+]
+
+

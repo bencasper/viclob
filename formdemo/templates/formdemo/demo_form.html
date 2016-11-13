@@ -1,0 +1,42 @@
+{% extends "home/base.html" %}
+
+{% block content %}
+
+<form action="/testform/demo/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit"/>
+
+    <button class='js-captcha-refresh'></button>
+</form>
+
+
+<script type="text/javascript">
+/**
+    $('.js-captcha-refresh').click(function(){
+        $form = $(this).parents('form');
+
+        $.getJSON($(this).data('url'), {}, function(json) {
+            // This should update your captcha image src and captcha hidden input
+        });
+
+        return false;
+    });
+
+
+*/
+
+        $('.captcha').click(function(){
+
+        console.log('demo')
+        $form = $('.js-captcha-refresh').parents('form');
+        console.log($form)
+        $.getJSON($(this).data('url'), {}, function(json) {
+            // This should update your captcha image src and captcha hidden input
+        });
+
+        return false;
+    });
+</script>
+
+{% endblock %}
