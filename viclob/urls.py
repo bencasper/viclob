@@ -23,6 +23,8 @@ urlpatterns = [
 
     url(r'^captcha/', include('captcha.urls')),
 
+    url(r'^comments/', include('django_comments.urls')),
+
     url(r'^testform/demo/$', form_views.demo, name='form'),
     url(r'^testform/thanks/$', form_views.thanks, name='form'),
 

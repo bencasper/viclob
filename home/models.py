@@ -2,7 +2,11 @@
 
 from __future__ import absolute_import, unicode_literals
 
+from random import random, randint
+
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
+from hitcount.models import HitCountMixin, HitCount
 from modelcluster.fields import ParentalKey
 from wagtail.wagtailadmin.edit_handlers import InlinePanel
 from wagtail.wagtailcore.models import Page, Orderable
@@ -152,6 +156,28 @@ class NewsContentPage(Page):
                                    default=0)
     practitionerType = models.IntegerField(choices=PRACTITIONER_TYPES,
                                            default=0)
+
+    """
+        HitCountMixin provides an easy way to add a `hit_count` property to your
+        model that will return the related HitCount object.
+        """
+
+    @property
+    def hit_count(self):
+        ctype = ContentType.objects.get_for_model(self.__class__)
+        hit_count, created = HitCount.objects.get_or_create(
+            content_type=ctype, object_pk=self.pk)
+        if hit_count.hits < 100:
+            init_num = randint(100, 1000)
+            # for i in range(init_num):
+            #     hit_count.increase()
+            hit_count.hits = init_num
+            hit_count.save()
+        return hit_count
+
+    def serve(self, request):
+        self.hit_count.increase()
+        return super(NewsContentPage, self).serve(request)
 
     class Meta:
         verbose_name = u'资讯内容页'
@@ -307,7 +333,6 @@ ContactPage.content_panels = [
 ]
 
 
-
 class FormField(AbstractFormField):
     page = ParentalKey('FormPage', related_name='form_fields')
 
@@ -330,5 +355,3 @@ FormPage.content_panels = [
     #     FieldPanel('subject'),
     # ], "Email"),
 ]
-
-
