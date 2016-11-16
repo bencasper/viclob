@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from django.db import models
-
+from django import forms
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
     PageChooserPanel
+from wagtail.wagtailcore.blocks import StreamBlock, CharBlock, RichTextBlock, StructBlock, TextBlock, FieldBlock, \
+    RawHTMLBlock
 from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
+from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 
@@ -13,7 +17,7 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 
 class LinkFields(models.Model):
-    link_external = models.URLField("链接地址", blank=True)
+    link_external = models.URLField(u'链接地址', blank=True)
     link_page = models.ForeignKey(
         'wagtailcore.Page',
         null=True,
@@ -56,13 +60,14 @@ class ContactFields(models.Model):
     post_code = models.CharField(verbose_name=u'邮编', max_length=10, blank=True)
 
     panels = [
+        FieldPanel('city'),
+        FieldPanel('address_1'),
         FieldPanel('telephone'),
         FieldPanel('email'),
         FieldPanel('wechat'),
-        FieldPanel('address_1'),
-        FieldPanel('city'),
+
         # FieldPanel('country'),
-        FieldPanel('post_code'),
+        # FieldPanel('post_code'),
     ]
 
     class Meta:
@@ -91,6 +96,57 @@ class CarouselItem(LinkFields):
     class Meta:
         abstract = True
 
+
+# Global Streamfield definition
+
+
+class PullQuoteBlock(StructBlock):
+    quote = TextBlock(label=u'引用正文')
+    attribution = CharBlock(label=u'引用自')
+
+    class Meta:
+        icon = "openquote"
+
+
+class ImageFormatChoiceBlock(FieldBlock):
+    field = forms.ChoiceField(choices=(
+        ('left', u'居左'), ('right', u'居右'), ('mid', u'居中'), ('full', u'全尺寸'),
+    ))
+
+
+class HTMLAlignmentChoiceBlock(FieldBlock):
+    field = forms.ChoiceField(choices=(
+        ('normal', u'普通'), ('full', u'全尺寸'),
+    ))
+
+
+class ImageBlock(StructBlock):
+    image = ImageChooserBlock(label=u'请选择图片')
+    caption = RichTextBlock()
+    alignment = ImageFormatChoiceBlock()
+
+
+class AlignedHTMLBlock(StructBlock):
+    html = RawHTMLBlock()
+    alignment = HTMLAlignmentChoiceBlock()
+
+    class Meta:
+        icon = "code"
+
+
+class ContentStreamBlock(StreamBlock):
+    h2 = CharBlock(icon="title", classname="title")
+    h3 = CharBlock(icon="title", classname="title")
+    h4 = CharBlock(icon="title", classname="title")
+    intro = RichTextBlock(icon="pilcrow", label=u'引言')
+    paragraph = RichTextBlock(icon="pilcrow", label=u'段落')
+    aligned_image = ImageBlock(label=u'图片', icon="image")
+    pullquote = PullQuoteBlock(label=u'引言')
+    aligned_html = AlignedHTMLBlock(icon="code", label=u'HTML 代码')
+    document = DocumentChooserBlock(icon="doc-full-inverse", label=u'请选择文本')
+
+
+# Global Streamfield definition end
 
 class IndexItem(models.Model):
     title = models.CharField(verbose_name=u'主题', max_length=255)
