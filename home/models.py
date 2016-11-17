@@ -90,6 +90,11 @@ class IndexPage(Page):
     ]
 
     @property
+    def subs(self):
+        subs = IndexPage.objects.live().descendant_of(self)
+        return subs
+
+    @property
     def contents(self):
         # Get list of live blog pages that are descendants of this page
         contents = ContentPage.objects.live().descendant_of(self)
@@ -155,6 +160,14 @@ class ContentPage(BasicPage):
     tags = ClusterTaggableManager(through=ContentPageTag, blank=True)
     author = models.CharField(verbose_name=u"发布人", max_length=20, blank=True)
     date = models.DateField(u"发布时间")
+    thumbnail = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
     feed_image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -181,7 +194,7 @@ ContentPage.content_panels = [
     FieldPanel('author'),
     FieldPanel('date'),
     FieldPanel('type'),
-
+    ImageChooserPanel('thumbnail'),
     StreamFieldPanel('body'),
     InlinePanel('carousel_items', label="Carousel items"),
     InlinePanel('related_links', label="Related links"),

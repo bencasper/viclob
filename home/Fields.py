@@ -138,7 +138,7 @@ class ContentStreamBlock(StreamBlock):
     h2 = CharBlock(icon="title", classname="title")
     h3 = CharBlock(icon="title", classname="title")
     h4 = CharBlock(icon="title", classname="title")
-    intro = RichTextBlock(icon="pilcrow", label=u'引言')
+    intro = RichTextBlock(icon="pilcrow", label=u'简介')
     paragraph = RichTextBlock(icon="pilcrow", label=u'段落')
     aligned_image = ImageBlock(label=u'图片', icon="image")
     pullquote = PullQuoteBlock(label=u'引言')
