@@ -35,7 +35,7 @@ urlpatterns = [
 
 
     # url(r'^accounts/login/$', auth_views.login, {'template_name': 'login/login.html'}, name='login'),
-    # url(r'^accounts/logout/$', auth_views.logout, {'template_name': 'login/logged_out.html'}, name='logout'),
+    # url(r'^accounts/logout/$', auth_views.logout, {'template_name': 'login/logout.html'}, name='logout'),
     url(r'^viclob/register/$', RegistrationView.as_view(form_class=RegistrationForm), name='viclob'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
 

@@ -160,7 +160,7 @@ SITE_ID = '1'
 
 # LOGIN_URL = '/'
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/nav'
 
 # AUTH_USER_MODEL = "login.User"
 

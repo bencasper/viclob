@@ -14,6 +14,10 @@ register = template.Library()
 def get_google_maps_key():
     return getattr(settings, 'GOOGLE_MAPS_KEY', "")
 
+@register.assignment_tag(takes_context=True)
+def get_current_user(context):
+    print context['request'].user
+    return context['request'].user
 
 @register.assignment_tag(takes_context=True)
 def get_site_root(context):
@@ -38,9 +42,9 @@ def get_top_menu():
     menuitems = NavigationPage.objects.all().first().get_children().live().in_menu()
     for menuitem in menuitems:
         if menuitem.title == u'从业者':
-            menuitem.fa = 'fa-paper-plane'
+            menuitem.fa = 'fa-cloud'
         if menuitem.title == u'资讯':
-            menuitem.fa = 'fa-newspaper-o'
+            menuitem.fa = 'fa-paper-plane'
         elif menuitem.title == u'服务商':
             menuitem.fa = 'fa-video-camera'
         elif menuitem.title == u'联系我们':
