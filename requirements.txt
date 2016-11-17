@@ -5,3 +5,4 @@ wagtail-embed-videos
 django-simple-captcha
 django-contrib-comments
 django-hitcount
+django-registration
