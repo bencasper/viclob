@@ -10,7 +10,7 @@ html,
 body {
     padding-top: 20px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     height: 100%;
-    background: url(../images/bg.jpg) no-repeat center center fixed;
+    /* background: url(../images/bg.jpg) no-repeat center center fixed; */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -122,6 +122,31 @@ header.carousel .fill {
 }
 
 
+
+img {
+        margin-bottom: 2%;
+        margin-top: 2%;
+}
+
+img.full-width {
+    width: 100%;
+}
+
+img.left{
+    width: 45%;
+    margin-right: 5%;
+    float: left;
+}
+
+img.right{
+    width: 45%;
+    margin-left: 5%;
+    float: right;
+}
+
+h1, h2, h3, h4, h5 {
+    clear: both;
+}
 
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
     background-color: F05F40;

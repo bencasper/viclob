@@ -1,13 +1,38 @@
-{% extends "base.html" %}
-{% block title %}User Registration{% endblock %}
-{% block head %}User Registration{% endblock %}
+{% extends "home/base.html" %}
+{% block title %}欢迎入住云途网{% endblock %}
+{% block head %}欢迎入住云途网{% endblock %}
+
+
 {% block content %}
-    <form method="post" action=".">
+
+<style>
+        body {
+          padding-top: 40px;
+          padding-bottom: 40px;
+          background-color: #eee;
+        }
+
+        .form-signin {
+          max-width: 330px;
+          padding: 15px;
+          margin: 0 auto;
+        }
+
+
+
+</style>
+<div class="container text-center">
+    <form action="." method="POST" class="form-signin">
         {% csrf_token %}
         <table border="0">
             {{ form.as_table }}
         </table>
-        <input type="submit" value="Register" />
+        <button class="btn btn-sm btn-primary btn-block" type="submit">注册</button>
+
     </form>
-    <a href="/">Login</a>
+    <div class="row">
+        已有账号？ <a href="/accounts/login/">Login</a>
+    </div>
+</div>
+
 {% endblock %}
