@@ -24,7 +24,7 @@
     {% endblock %}
 </head>
 
-<body>
+<body  {% block body-class %} {% endblock %}>
 <div id="wrap">
     <div id="main" class="container clear-top">
         {% block menu %}
@@ -164,6 +164,10 @@
 <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/viclob.js' %}"></script>
+
+{% block extra_js %}
+
+{% endblock %}
 <!-- Script to Activate the Carousel -->
 <script>
     $('.carousel').carousel({

@@ -41,6 +41,32 @@ class NavigationPage(Page):
         verbose_name = u'目录导航页面'
 
 
+# solution page
+class SolutionPage(Page):
+    class Meta:
+        verbose_name = u'解决方案页面'
+
+
+# case page
+class CasePageCarouselItem(Orderable, CarouselItem):
+    page = ParentalKey('home.CasePage', related_name='carousel_items')
+
+
+class CasePageVideoItem(Orderable, VideoItem):
+    page = ParentalKey('home.CasePage', related_name='video_items')
+
+
+class CasePage(Page):
+    class Meta:
+        verbose_name = u'案例页面'
+
+
+CasePage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    InlinePanel('carousel_items', label=u"合作客户"),
+    InlinePanel('video_items', label=u"视频"),
+]
+
 INDEX_TYPES = ((0, u'请选择首页类型'),)
 CONTENT_TYPES = ((0, u'请选择内容类型'),)
 

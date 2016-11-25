@@ -97,6 +97,52 @@ class CarouselItem(LinkFields):
         abstract = True
 
 
+# # video items
+# class VideoItem(LinkFields):
+#     image = models.ForeignKey(
+#         'wagtailimages.Image',
+#         null=True,
+#         blank=True,
+#         on_delete=models.SET_NULL,
+#         related_name='+'
+#     )
+#     embed_url = models.URLField(u'链接URL', blank=True)
+#     caption = models.CharField(verbose_name=u'标题', max_length=255, blank=True)
+#
+#     panels = [
+#         ImageChooserPanel('image'),
+#         FieldPanel('embed_url'),
+#         FieldPanel('caption'),
+#         MultiFieldPanel(LinkFields.panels, "Link"),
+#     ]
+#
+#     class Meta:
+#         abstract = True
+
+
+# provider items
+class ProviderItem(models.Model):
+    logo = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    embed_url = models.URLField(u'链接URL', blank=True)
+    products = models.TextField(verbose_name=u'主要产品')
+    customers = models.TextField(verbose_name=u'客户方向')
+    panels = [
+        ImageChooserPanel('logo'),
+        FieldPanel('embed_url'),
+        FieldPanel('products'),
+        FieldPanel('customers'),
+    ]
+
+    class Meta:
+        abstract = True
+
+
 # Global Streamfield definition
 
 
@@ -183,9 +229,9 @@ class TopicItem(models.Model):
 
 
 class VideoItem(models.Model):
-    title = models.CharField(verbose_name=u'标题', max_length=255)
+    title = models.CharField(verbose_name=u'缩略图', max_length=255)
     content = RichTextField(verbose_name=u'视频内容', blank=True)
-    url = models.URLField(verbose_name=u'视频内容地址', blank=True)
+    url = models.URLField(verbose_name=u'视频链接地址', blank=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
