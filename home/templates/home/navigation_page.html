@@ -1,34 +1,40 @@
 {% extends "home/base.html" %}
 
 {% load viclob_tags wagtailcore_tags static %}
+{% block menu %}
+{% endblock %}
 
-
-{% block content %}
+{% block body %}
 {% get_site_root as site_root %}
-{% get_top_menu as menuitems %}
+{% get_nav_items as navitems %}
 
 <section id="services">
-    <div class="container" style="margin-top:200px">
+    <div class="container" style="margin-bottom:100px">
         <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="section-heading"></h2>
+            <div style="float:left; padding-top:10px;">
+                <img src="{% static 'images/viclob_logo.png'%}"/>
+            </div>
+            <div style="float:left;">
+                <h3 class="text-center">盛视云途网络技术（北京）有限公司 </h3>
+                <h4 class="text-center">Vi-Time Networking Technology Co.,Ltd</h4>
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row">
-            {% for menuitem in menuitems %}
-            <div class="col-lg-3 col-md-6 text-center">
-                <div class="service-box">
-                    <i class="fa fa-4x {{ menuitem.fa}} text-primary sr-icons"></i>
-
-                    <li class="{% if menuitem.show_dropdown %}dropdown{% endif %}{% if menuitem.active %} active{% endif %}">
-                        {% if menuitem.show_dropdown %}
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">{{ menuitem.title }} <b
-                                    class="caret"></b></a>
-                            {% top_menu_children parent=menuitem %}
+            {% for navitem in navitems %}
+            <div class="col-lg-4 col-md-6 text-center">
+                <div class="service-box nav">
+                    <a href="{% pageurl navitem %}">
+                        <i class="fa fa-4x {{ navitem.fa}} text-primary sr-icons"></i>
+                    </a>
+                    <li class="{% if navitem.show_dropdown %}dropdown{% endif %}{% if navitem.active %} active{% endif %}">
+                        {% if navitem.show_dropdown %}
+                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">{{ navitem.title }} <b
+                                class="caret"></b></a>
+                        {% top_menu_children parent=navitem %}
                         {% else %}
-                        <a href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
+                        <a href="{% pageurl navitem %}">{{ navitem.title }}</a>
                         {% endif %}
                     </li>
                 </div>
@@ -36,6 +42,20 @@
             {% endfor %}
         </div>
     </div>
+
 </section>
+
+
+{% block footer %}
+
+<div style="position: absolute; bottom:0; background: url({% static 'images/nav-footer.png' %}) no-repeat; background-size: 100%; height:256px; width:100%;">
+
+    <div class="col-lg-12 text-center" style="padding-top:50px;">
+        <h2>从视频内容生产、在线播放到全网发行</h2>
+        <h2>一体化垂直服务链条</h2>
+        <h2>重塑视频生态传播价值</h2>
+    </div>
+</div>
+{% endblock %}
 
 {% endblock %}

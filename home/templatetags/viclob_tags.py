@@ -38,19 +38,26 @@ def has_menu_children(page):
 
 
 @register.assignment_tag
-def get_top_menu():
+def get_nav_items():
+    navitems = []
     menuitems = NavigationPage.objects.all().first().get_children().live().in_menu()
     for menuitem in menuitems:
-        if menuitem.title == u'从业者':
-            menuitem.fa = 'fa-cloud'
-        if menuitem.title == u'资讯':
-            menuitem.fa = 'fa-paper-plane'
-        elif menuitem.title == u'服务商':
-            menuitem.fa = 'fa-video-camera'
-        elif menuitem.title == u'联系我们':
-            menuitem.fa = 'fa-phone'
         menuitem.show_dropdown = has_menu_children(menuitem)
-    return menuitems
+        if menuitem.title == u'解决方案':
+            menuitem.fa = 'fa-cloud'
+            menuitem.menu_priority = 10;
+            navitems.append(menuitem)
+        elif menuitem.title == u'资讯':
+            menuitem.fa = 'fa-paper-plane'
+            menuitem.menu_priority = 9;
+            navitems.append(menuitem)
+        elif menuitem.title == u'云服务商':
+            menuitem.fa = 'fa-video-camera'
+            menuitem.menu_priority = 8;
+            navitems.append(menuitem)
+
+    navitems.sort(key=lambda x: x.menu_priority, reverse=True)
+    return navitems
 
 
 # Retrieves the top menu items - the immediate children of the parent page

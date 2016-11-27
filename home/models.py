@@ -22,27 +22,43 @@ from home.Fields import *
 # A couple of static contants
 
 
+class MenuPage(Page):
+    menu_priority = models.SmallIntegerField(verbose_name=u'目录权重',
+                                             default=10,
+                                             blank=True)
+
+    class Meta:
+        abstract = True
+
+MenuPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    FieldPanel('menu_priority')
+]
+
+
 # entry page
-class HomePage(Page):
-    @property
-    def get_nav_page(self):
-        if NavigationPage.objects.all():
-            return NavigationPage.objects.all()[0]
-        else:
-            return self
+class HomePage(MenuPage):
+    # @property
+    # def get_nav_page(self):
+    #     if NavigationPage.objects.all():
+    #         return NavigationPage.objects.all()[0]
+    #     else:
+    #         return self
+
+    template = 'home/navigation_page.html'
 
     class Meta:
         verbose_name = u'入口页面'
 
 
 # navigation page
-class NavigationPage(Page):
+class NavigationPage(MenuPage):
     class Meta:
         verbose_name = u'目录导航页面'
 
 
 # solution page
-class SolutionPage(Page):
+class SolutionPage(MenuPage):
     class Meta:
         verbose_name = u'解决方案页面'
 
@@ -56,13 +72,14 @@ class CasePageVideoItem(Orderable, VideoItem):
     page = ParentalKey('home.CasePage', related_name='video_items')
 
 
-class CasePage(Page):
+class CasePage(MenuPage):
     class Meta:
         verbose_name = u'案例页面'
 
 
 CasePage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('menu_priority'),
     InlinePanel('carousel_items', label=u"合作客户"),
     InlinePanel('video_items', label=u"视频"),
 ]
@@ -107,7 +124,7 @@ class IndexPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('home.IndexPage', related_name='related_links')
 
 
-class IndexPage(Page):
+class IndexPage(MenuPage):
     intro = RichTextField(blank=True)
     type = models.IntegerField(choices=INDEX_TYPES,
                                default=0)
@@ -161,6 +178,7 @@ class IndexPage(Page):
 
 IndexPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('menu_priority'),
     FieldPanel('intro', classname="full"),
     InlinePanel('related_links', label="Related links"),
 ]
@@ -264,7 +282,7 @@ class StandardPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('home.StandardPage', related_name='related_links')
 
 
-class StandardPage(Page):
+class StandardPage(MenuPage):
     # intro = RichTextField(blank=True)
     body = RichTextField(blank=True)
     feed_image = models.ForeignKey(
@@ -286,6 +304,7 @@ class StandardPage(Page):
 
 StandardPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('menu_priority'),
     # FieldPanel('intro', classname="full"),
     InlinePanel('carousel_items', label="logos"),
     FieldPanel('body', classname="full"),
@@ -351,7 +370,7 @@ class FieldIndexPage(ColumnIndexPage):
 
 # Contact page
 
-class ContactPage(Page):
+class ContactPage(MenuPage):
     body = RichTextField(verbose_name='简介', blank=True)
     telephone = models.CharField(verbose_name=u'电话', max_length=20, blank=True)
     email = models.EmailField(blank=True)
@@ -376,6 +395,7 @@ class ContactPage(Page):
 
 ContactPage.content_panels = [
     FieldPanel('title', classname="full title"),
+    FieldPanel('menu_priority'),
     FieldPanel('body', classname="full"),
     FieldPanel('telephone', classname='full'),
     FieldPanel('email', classname='full'),
