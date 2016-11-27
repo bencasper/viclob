@@ -18,13 +18,11 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
     <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css'%}"/>
     <link rel="stylesheet" href="{% static 'css/viclob.css' %}">
+    <script type="text/javascript" src="{% static 'js/solution.css.js' %}"></script>
 
 </head>
 
-<body >
-
-<script type="text/javascript" src="{% static 'js/solution.css.js' %}"></script>
-
+<body>
 
 
 {% block content %}
@@ -33,6 +31,249 @@
 
 <!-- Service Tabs -->
 <div class="fullpage">
+    <div class="section">
+        {% get_site_root as site_root %}
+        {% top_menu parent=site_root calling_page=self %}
+    </div>
+    <div class="section" style="margin-top:80px;">
+
+
+    </div>
+    <!--发行平台-->
+    <div class="section">
+        <div class="container">
+            <div class="row text-center" style="color:#6f7e94; padding-bottom:50px;">
+                <div class="col-lg-4 line"></div>
+                <div class="col-lg-4">
+                    <h1 class="iconfont">云途VDP（Video Distribution Platform）</h1>
+                    <h1 class="iconfont">视频全网发行平台</h1>
+                </div>
+                <div class="col-lg-4 line"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="lcps-wrap">
+                        <div class="lcps-content">
+                            <!--<p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>-->
+                            <div class="lcps-desc-wrap">
+                                <p><i class="iconfont">&#xe6cc;</i>服务于企业、自媒体、PGC等内容方</p>
+                                <p><i class="iconfont">&#xe6cc;</i>整合内容、技术、渠道优势资源，提供视频制作、云视频、全网发行的垂直服务链</p>
+                                <p><i class="iconfont">&#xe6cc;</i>致力于重塑视频生态营销价值</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <img src="{% static 'images/publish_platform.png' %}" alt="">
+                </div>
+                <div class="col-lg-4"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--内容制作-->
+    <div class="section" style="padding-top:50px;">
+        <div class="container">
+            <div class="row text-center" style="color:#6f7e94; padding-bottom:50px;">
+                <div class="col-lg-4 line"></div>
+                <div class="col-lg-4">
+                    <h1 class="iconfont">内容制作</h1>
+                </div>
+                <div class="col-lg-4 line"></div>
+            </div>
+            <div class="row">
+                <div class="lcps-wrap" style="float:left;">
+                    <div class="lcps-content">
+                        <div class="lcps-desc-wrap">
+                            <p><i class="iconfont">&#xe6cc;</i>聚焦企业场景化应用，线下专业拍摄执行团队</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/market.png'%}" width="120" height="80">
+                    <div>企业市场传播</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/bbs.png'%}" width="120" height="80">
+                    <div>峰会论坛</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/finance.png'%}" width="120" height="80">
+                    <div>金融直播</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/games.png'%}" width="120" height="80">
+                    <div>赛事直播</div>
+                </div>
+
+            </div>
+            <div class="row" style="padding-top:50px;">
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/cele.png'%}" width="120" height="80">
+                    <div>演出年会</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/diago.png'%}" width="120" height="80">
+                    <div>医疗直播</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/classroom.png'%}" width="120" height="80">
+                    <div>网络互动课堂</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/meeting.png'%}" width="120" height="80">
+                    <div>视频会议</div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="lcps-wrap" style="float:left;">
+                    <div class="lcps-content">
+                        <!--<p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>-->
+                        <div class="lcps-desc-wrap">
+                            <p><i class="iconfont">&#xe6cc;</i>关注客户内容营销诉求，电影级拍摄制作水平</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-top:50px;">
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/cartoon.png'%}" width="120" height="80">
+                    <div>动漫作品</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/ad.png'%}" width="120" height="80">
+                    <div>TVC广告</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/subject.png'%}" width="120" height="80">
+                    <div>专题/宣传/纪录片</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/tv.png'%}" width="120" height="80">
+                    <div>电视栏目</div>
+                </div>
+
+            </div>
+
+            <div class="row" style="padding-top:20px;">
+                <div class="lcps-wrap" style="float:left;">
+                    <div class="lcps-content">
+                        <!--<p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>-->
+                        <div class="lcps-desc-wrap">
+
+                            <p><img src="{% static 'images/tip.png'%}" width="20" height="20">
+                                去看看作品展示</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--接入流程-->
+    <div class="section">
+        <div class="container">
+            <div class="row text-center" style="color:#6f7e94; padding-bottom:20px;">
+                <div class="col-lg-4 line"></div>
+                <div class="col-lg-4">
+                    <h1 class="iconfont">云视频saas服务，企业一站式网络视频应用平台</h1>
+                    <h1 class="iconfont">接入流程</h1>
+                </div>
+                <div class="col-lg-4 line"></div>
+            </div>
+
+            <div class="row">
+                <div class="lcps-wrap" style="float:left;">
+                    <div class="lcps-content">
+                        <!--<p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>-->
+                        <div class="lcps-desc-wrap">
+                            <p><i class="iconfont">&#xe6cc;</i>企业点播视频／直播流推送至云平台，自动转码、存储、加密和分发加速
+                                并提供媒体库、播放器设置、数据分析等丰富的运营级增值服务功能</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                    <img src="{% static 'images/process.png' %}" alt="">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--点播平台-->
+    <div class="section" style="padding-bottom:50px;">
+        <div class="container">
+            <div class="row text-center" style="color:#6f7e94; padding-bottom:20px;">
+                <div class="col-lg-4 line"></div>
+                <div class="col-lg-4">
+                    <h1 class="iconfont">视频点播saas平台</h1>
+                    <h1 class="iconfont"></h1>
+                </div>
+                <div class="col-lg-4 line"></div>
+            </div>
+
+            <div class="row">
+                <div class="lcps-wrap" style="float:left;">
+                    <div class="lcps-content">
+                        <!--<p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>-->
+                        <div class="lcps-desc-wrap">
+                            <p><i class="iconfont">&#xe6cc;</i>视频上传、转码、存储、加速、媒资库、加密、播放器、数据统计等一站式服务</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1"></div>
+
+                <div class="col-lg-10">
+                    <img src="{% static 'images/saas.png' %}" alt="">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--VDP-->
+    <div class="section">
+        <div class="container">
+            <div class="row text-center" style="color:#6f7e94; padding-bottom:50px;">
+                <div class="col-lg-4 line"></div>
+                <div class="col-lg-4">
+                    <h1 class="iconfont">云途VDP</h1>
+                    <h1 class="iconfont">视频全网发行平台</h1>
+                </div>
+                <div class="col-lg-4 line"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="lcps-wrap">
+                        <div class="lcps-content">
+                            <!--<p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>-->
+                            <div class="lcps-desc-wrap">
+                                <p><i class="iconfont">&#xe6cc;</i></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <img src="{% static 'images/vdp.png' %}" alt="">
+                </div>
+                <div class="col-lg-4"></div>
+
+            </div>
+        </div>
+    </div>
+
     <div class="section">
         <div id="container" class="product-wrap clearfix">
             <div class="player-wrap">
@@ -250,6 +491,23 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     </script>
     <script>
 
@@ -273,6 +531,23 @@
             $('#header ul li').width($("body").width() / 1200 * 75);
         }
     });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
