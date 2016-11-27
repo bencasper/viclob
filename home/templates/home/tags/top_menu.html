@@ -1,4 +1,4 @@
-{% load viclob_tags wagtailcore_tags %}
+{% load viclob_tags wagtailcore_tags static %}
 {% get_site_root as site_root %}
 {% get_home_page as homepage %}
 {% get_current_user as user%}
@@ -15,7 +15,10 @@
             </button>
             {# Link to home page #}
             <a href="{% pageurl homepage %}" class="navbar-brand" title="{{ homepage.title }}" data-placement="bottom">
-                <i class="glyphicon glyphicon-home"></i>
+                <i class="">
+                    <img src="{% static 'images/viclob_logo.png'%}" width="20" height="20"/>
+                </i>
+
             </a>
         </div>
         <div class="navbar-collapse collapse">

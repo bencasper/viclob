@@ -57,13 +57,32 @@ a:focus {
 border-color: rgba(255, 255, 255, 0.3);
 }
 
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+    color: #F05F40 !important;
+    font-weight: bold;
+    background: transparent;
+
+}
+
+.dropdown-menu>li>a {
+    color: #F05F40 !important;
+}
+
 .navbar-default .nav > li.active > a,
 .navbar-default .nav > li.active > a:focus {
   color: #F05F40 !important;
+  font-weight: bold;
   background-color: transparent;
 }
 .navbar-default .nav > li.active > a:hover,
 .navbar-default .nav > li.active > a:focus:hover {
+  background-color: transparent;
+}
+
+.navbar-default .nav > li > a:hover,
+.navbar-default .nav > li > a:focus:hover {
+  color: #F05F40 !important;
+  font-weight: bold;
   background-color: transparent;
 }
 
@@ -177,6 +196,11 @@ section {
 /* h line */
 .line {
     background: url('../images/line.png') repeat-x;
+}
+
+.verticalLine {
+    border-left: 0px solid #000000;
+    display: inline;
 }
 
 /* Footer Styles */
