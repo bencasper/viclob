@@ -72,10 +72,6 @@ class CasePageCarouselItem(Orderable, CarouselItem):
     page = ParentalKey('home.CasePage', related_name='carousel_items')
 
 
-class CasePageVideoItem(Orderable, VideoItem):
-    page = ParentalKey('home.CasePage', related_name='video_items')
-
-
 class CasePage(MenuPage):
     class Meta:
         verbose_name = u'案例页面'
@@ -85,7 +81,6 @@ CasePage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('menu_priority'),
     InlinePanel('carousel_items', label=u"合作客户"),
-    InlinePanel('video_items', label=u"视频"),
 ]
 
 INDEX_TYPES = ((0, u'请选择首页类型'),)
@@ -174,7 +169,6 @@ class IndexPage(MenuPage):
         contents = self.contents
         page_count = contents.count()
 
-
         # Filter by tag
         tag = request.GET.get('tag')
         author = request.GET.get('author')
@@ -183,7 +177,7 @@ class IndexPage(MenuPage):
         if tag:
             contents = contents.filter(tags__name=tag)
         elif author:
-            print 'author------------' , author
+            print 'author------------', author
             contents = contents.filter(author=author)
         elif order_by:
             if order_by == 'hit':
@@ -225,7 +219,6 @@ class IndexPage(MenuPage):
     def serve(self, request, *args, **kwargs):
         request.is_preview = getattr(request, 'is_preview', False)
         print 'serve'
-
 
         context = self.get_context(request, *args, **kwargs)
         for content in context['contents']:
@@ -344,11 +337,75 @@ class ColumnIndexPage(IndexPage):
         verbose_name = u'专栏List'
 
 
+CAREER_TYPES = (
+    {"key": 'manager', "value": u'管理者'},
+    {"key": 'seller', "value": u'营销'},
+    {"key": 'market', "value": u'市场'},
+    {"key": 'provider', "value": u'技术支持'},
+    {"key": 'product', "value": u'产品'},
+    {"key": 'test', "value": u'测试'},
+    {"key": 'dev', "value": u'开发'},
+    {"key": 'keep', "value": u'运维'},
+)
+
+
 class CareerIndexPage(IndexPage):
-    template = 'home/index_base.html'
+    @property
+    def careerTypes(self):
+        return CAREER_TYPES
 
     class Meta:
         verbose_name = u'圈子List'
+
+
+CareerIndexPage.content_panels = [
+    FieldPanel('title', classname="full title"),
+    InlinePanel('manager_items', label=u"管理者"),
+    InlinePanel('seller_items', label=u"营销"),
+    InlinePanel('market_items', label=u"市场"),
+    InlinePanel('provider_items', label=u"技术支持"),
+    InlinePanel('product_items', label=u"产品"),
+    InlinePanel('test_items', label=u"测试"),
+    InlinePanel('dev_items', label=u"开发"),
+    InlinePanel('keep_items', label=u"运维"),
+    InlinePanel('co_items', label=u"合作伙伴"),
+]
+
+
+class ManagerShowItem(Orderable, CareerShowItem):
+    page = ParentalKey('home.CareerIndexPage', related_name='manager_items')
+
+
+class SellerShowItem(Orderable, CareerShowItem):
+    page = ParentalKey('home.CareerIndexPage', related_name='seller_items')
+
+
+class MarketShowItem(Orderable, CareerShowItem):
+    page = ParentalKey('home.CareerIndexPage', related_name='market_items')
+
+
+class ProviderShowItem(Orderable, CareerShowItem):
+    page = ParentalKey('home.CareerIndexPage', related_name='provider_items')
+
+
+class ProductShowItem(Orderable, CareerShowItem):
+    page = ParentalKey('home.CareerIndexPage', related_name='product_items')
+
+
+class TestShowItem(Orderable, CareerShowItem):
+    page = ParentalKey('home.CareerIndexPage', related_name='test_items')
+
+
+class DevShowItem(Orderable, CareerShowItem):
+    page = ParentalKey('home.CareerIndexPage', related_name='dev_items')
+
+
+class KeepShowItem(Orderable, CareerShowItem):
+    page = ParentalKey('home.CareerIndexPage', related_name='keep_items')
+
+
+class CoShowItem(Orderable, CarouselItem):
+    page = ParentalKey('home.CareerIndexPage', related_name='co_items')
 
 
 # 服务商

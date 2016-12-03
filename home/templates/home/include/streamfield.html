@@ -9,7 +9,7 @@
         {% elif child.block_type == 'h4' %}
             <h4>{{ child }}</h4>
         {% elif child.block_type == 'intro' %}
-            <div class="intro">{{ child }}</div>
+            <div class="intro well">{{ child }}</div>
         {% elif child.block_type == 'aligned_html' %}
             {% if child.value.alignment == 'normal' %}
                 {{ child.value.bound_blocks.html.render }}

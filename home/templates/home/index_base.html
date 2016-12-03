@@ -50,6 +50,7 @@
 
         </div>
 
+        {% block list %}
         <div class="col-lg-9">
             <div class="row">
                 {% for content in contents %}
@@ -105,6 +106,7 @@
             </nav>
             {% endif %}
         </div>
+        {% endblock %}
     </div>
 
 </div>

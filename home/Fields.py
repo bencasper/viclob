@@ -229,8 +229,8 @@ class TopicItem(models.Model):
 
 
 class VideoItem(models.Model):
-    title = models.CharField(verbose_name=u'缩略图', max_length=255)
-    content = RichTextField(verbose_name=u'视频内容', blank=True)
+    title = models.CharField(verbose_name=u'视频名称', max_length=255)
+    # content = RichTextField(verbose_name=u'视频内容', blank=True)
     url = models.URLField(verbose_name=u'视频链接地址', blank=True)
     image = models.ForeignKey(
         'wagtailimages.Image',
@@ -244,6 +244,30 @@ class VideoItem(models.Model):
         FieldPanel('title'),
         FieldPanel('content', classname='full'),
         FieldPanel('url'),
+        ImageChooserPanel('image'),
+
+    ]
+
+    class Meta:
+        abstract = True
+
+
+class CareerShowItem(models.Model):
+    name = models.CharField(verbose_name=u'从业者名称', max_length=255)
+    title = models.CharField(verbose_name=u'从业者title', max_length=255)
+    content = RichTextField(verbose_name=u'简介', blank=True)
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=False,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('title'),
+        FieldPanel('content', classname='full'),
         ImageChooserPanel('image'),
 
     ]
