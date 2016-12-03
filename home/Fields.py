@@ -122,6 +122,7 @@ class CarouselItem(LinkFields):
 
 # provider items
 class ProviderItem(models.Model):
+    title = models.CharField(verbose_name=u'供应商', max_length=255)
     logo = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -130,9 +131,10 @@ class ProviderItem(models.Model):
         related_name='+'
     )
     embed_url = models.URLField(u'链接URL', blank=True)
-    products = models.TextField(verbose_name=u'主要产品')
-    customers = models.TextField(verbose_name=u'客户方向')
+    products = RichTextField(verbose_name=u'主要产品')
+    customers = RichTextField(verbose_name=u'客户方向')
     panels = [
+        FieldPanel('title'),
         ImageChooserPanel('logo'),
         FieldPanel('embed_url'),
         FieldPanel('products'),
@@ -141,6 +143,7 @@ class ProviderItem(models.Model):
 
     class Meta:
         abstract = True
+
 
 
 # Global Streamfield definition

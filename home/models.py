@@ -73,6 +73,14 @@ class CasePageCarouselItem(Orderable, CarouselItem):
 
 
 class CasePage(MenuPage):
+    co = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
     class Meta:
         verbose_name = u'案例页面'
 
@@ -80,6 +88,7 @@ class CasePage(MenuPage):
 CasePage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('menu_priority'),
+    ImageChooserPanel('co'),
     InlinePanel('carousel_items', label=u"合作客户"),
 ]
 
@@ -141,6 +150,10 @@ class BasicPage(Page):
 
 class IndexPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('home.IndexPage', related_name='related_links')
+
+
+class IndexPageProviderItems(Orderable, ProviderItem):
+    page = ParentalKey('home.IndexPage', related_name='providers')
 
 
 # 行业资讯 indexPage
@@ -237,6 +250,7 @@ IndexPage.content_panels = [
     FieldPanel('menu_priority'),
     FieldPanel('intro', classname="full"),
     InlinePanel('related_links', label="Related links"),
+    InlinePanel('providers', label="供应商列表"),
 ]
 
 IndexPage.promote_panels = Page.promote_panels
@@ -454,31 +468,45 @@ StandardPage.promote_panels = Page.promote_panels + [
 
 
 class VODIndexPage(IndexPage):
+    template = 'home/provider.html'
+
     class Meta:
         verbose_name = u'点直播List'
 
 
 class CNDIndexPage(IndexPage):
+    template = 'home/provider.html'
+
     class Meta:
         verbose_name = u'流媒体加速List'
 
 
 class VCIndexPage(IndexPage):
+    template = 'home/provider.html'
+
     class Meta:
         verbose_name = u'视频会议List'
 
 
 class MonitorIndexPage(IndexPage):
+    template = 'home/provider.html'
+
     class Meta:
         verbose_name = u'远程监控List'
 
 
 class IOTIndexPage(IndexPage):
+    template = 'home/provider.html'
+
     class Meta:
         verbose_name = u'物联网List'
 
 
 class ProviderIndexPage(VODIndexPage):
+    def serve(self, request, *args, **kwargs):
+        page = VODIndexPage.objects.first()
+        return VODIndexPage.serve(page, request)
+
     class Meta:
         verbose_name = u'服务商首页'
 

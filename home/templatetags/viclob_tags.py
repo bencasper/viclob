@@ -4,7 +4,7 @@ from django import template
 from django.conf import settings
 from wagtail.wagtailcore.models import Page
 
-from home.models import NavigationPage, HomePage, NewsIndexPage
+from home.models import NavigationPage, HomePage, NewsIndexPage, ProviderIndexPage
 
 register = template.Library()
 
@@ -75,6 +75,19 @@ def news_sub_navitems(calling_page=None):
         print navitem.url
     print navitems
     return navitems
+
+
+@register.assignment_tag
+def provider_sub_navitems(calling_page=None):
+    news_indexpage = ProviderIndexPage.objects.first()
+    navitems = news_indexpage.get_children().live().in_menu()
+    for navitem in navitems:
+        navitem.active = (calling_page.url.startswith(navitem.url) if calling_page else False)
+        print calling_page.url
+        print navitem.url
+    print navitems
+    return navitems
+
 
 
 # Retrieves the top menu items - the immediate children of the parent page

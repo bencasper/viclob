@@ -11,6 +11,7 @@
 {% get_site_root as site_root %}
 
 {% news_sub_navitems calling_page=self as subs%}
+{% provider_sub_navitems calling_page=self as provider_subs%}
 
 
 <div class="container">
@@ -28,13 +29,13 @@
     <div class="row">
 
         <div class="col-lg-3">
-
+            {% block subnav %}
             <ul class="nav nav-list text-center">
                 {% for sub in subs %}
                 <li class="{% if sub.active %} active{% endif %}"><a href="{%pageurl sub %}"> {{ sub.title}} </a></li>
                 {% endfor %}
             </ul>
-
+            {% endblock %}
 
             <!--{% if newsTypes %}-->
             <!--<div class="list-group">-->
