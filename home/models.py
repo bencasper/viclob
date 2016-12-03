@@ -6,6 +6,8 @@ from random import randint
 
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import HttpResponse
+from django.template.response import TemplateResponse
 from hitcount.models import HitCount
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey
@@ -13,6 +15,7 @@ from taggit.models import TaggedItemBase
 from wagtail.wagtailadmin.edit_handlers import InlinePanel, StreamFieldPanel
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Page, Orderable
+from wagtail.wagtailcore.url_routing import RouteResult
 from wagtail.wagtailforms.models import AbstractFormField, AbstractForm
 from wagtail.wagtailsearch import index
 
@@ -29,6 +32,7 @@ class MenuPage(Page):
 
     class Meta:
         abstract = True
+
 
 MenuPage.content_panels = [
     FieldPanel('title', classname="full title"),
@@ -110,9 +114,29 @@ class BasicPage(Page):
             hit_count.save()
         return hit_count
 
+    @property
+    def like_count(self):
+        ctype = ContentType.objects.get_for_model(self.__class__)
+        like_count, created = HitCount.objects.get_or_create(
+            content_type=ctype, object_pk=self.pk)
+        if like_count.hits < 100:
+            init_num = randint(50, 200)
+
+            like_count.hits = init_num
+            like_count.save()
+        return like_count
+
     def serve(self, request):
-        self.hit_count.increase()
-        return super(BasicPage, self).serve(request)
+        if "like" in request.GET:
+            self.like_count.increase()
+            response = HttpResponse(
+                self.like_count,
+                content_type='application/json',
+            )
+            return response
+        else:
+            self.hit_count.increase()
+            return super(BasicPage, self).serve(request)
 
     class Meta:
         abstract = True
@@ -124,6 +148,7 @@ class IndexPageRelatedLink(Orderable, RelatedLink):
     page = ParentalKey('home.IndexPage', related_name='related_links')
 
 
+# 行业资讯 indexPage
 class IndexPage(MenuPage):
     intro = RichTextField(blank=True)
     type = models.IntegerField(choices=INDEX_TYPES,
@@ -131,11 +156,6 @@ class IndexPage(MenuPage):
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
     ]
-
-    @property
-    def subs(self):
-        subs = IndexPage.objects.live().descendant_of(self)
-        return subs
 
     @property
     def contents(self):
@@ -148,21 +168,32 @@ class IndexPage(MenuPage):
         return contents
 
     def get_context(self, request):
+
+        print 'get context'
         # Get blogs
         contents = self.contents
+        page_count = contents.count()
+
 
         # Filter by tag
         tag = request.GET.get('tag')
+        author = request.GET.get('author')
+        print tag
         order_by = request.GET.get('orderBy')
         if tag:
             contents = contents.filter(tags__name=tag)
+        elif author:
+            print 'author------------' , author
+            contents = contents.filter(author=author)
         elif order_by:
             if order_by == 'hit':
                 contents = contents.order_by('-order_by')
-
+        print contents.count()
         # Pagination
         page = request.GET.get('page')
-        paginator = Paginator(contents, 10)  # Show 10 contents per page
+        if not page:
+            page = 1
+        paginator = Paginator(contents, 5)  # Show 5 contents per page
         try:
             contents = paginator.page(page)
         except PageNotAnInteger:
@@ -172,8 +203,40 @@ class IndexPage(MenuPage):
 
         # Update template context
         context = super(IndexPage, self).get_context(request)
+
+        for content in contents:
+            print 'a'
+            print content
+
         context['contents'] = contents
+        context['pagecount'] = page_count
+        if page > 1:
+            context['pre'] = int(page) - 1
+
+        print page, page_count
+        print int(page) * 5 < page_count
+        if int(page) * 5 < page_count:
+            print '----next----'
+            context['next'] = int(page) + 1
+        if tag:
+            context['tag'] = tag
         return context
+
+    def serve(self, request, *args, **kwargs):
+        request.is_preview = getattr(request, 'is_preview', False)
+        print 'serve'
+
+
+        context = self.get_context(request, *args, **kwargs)
+        for content in context['contents']:
+            print 'debug'
+            print content
+
+        return TemplateResponse(
+            request,
+            self.get_template(request, *args, **kwargs),
+            context
+        )
 
 
 IndexPage.content_panels = [
@@ -251,24 +314,41 @@ ContentPage.promote_panels = Page.promote_panels + [
 
 
 # 咨询
-class EventIndexPage(IndexPage):
+class NewsIndexPage(IndexPage):
+    def serve(self, request, *args, **kwargs):
+        page = EventIndexPage.objects.first()
+        return EventIndexPage.serve(page, request)
+
     class Meta:
-        verbose_name = u'动态List'
+        verbose_name = u'资讯首页'
+
+
+class EventIndexPage(IndexPage):
+    template = 'home/index_base.html'
+
+    class Meta:
+        verbose_name = u'动态'
 
 
 class TechIndexPage(IndexPage):
+    template = 'home/index_base.html'
+
     class Meta:
         verbose_name = u'技术List'
 
 
-class CaseIndexPage(IndexPage):
+class ColumnIndexPage(IndexPage):
+    template = 'home/index_base.html'
+
     class Meta:
-        verbose_name = u'应用List'
+        verbose_name = u'专栏List'
 
 
-class NewsIndexPage(EventIndexPage):
+class CareerIndexPage(IndexPage):
+    template = 'home/index_base.html'
+
     class Meta:
-        verbose_name = u'资讯首页'
+        verbose_name = u'圈子List'
 
 
 # 服务商
@@ -348,10 +428,6 @@ class ProviderIndexPage(VODIndexPage):
 
 # 从业者
 
-class ColumnIndexPage(IndexPage):
-    class Meta:
-        verbose_name = u'专栏List'
-
 
 class ViewIndexPage(IndexPage):
     class Meta:
@@ -361,11 +437,6 @@ class ViewIndexPage(IndexPage):
 class FAQIndexPage(IndexPage):
     class Meta:
         verbose_name = u'FAQ List'
-
-
-class FieldIndexPage(ColumnIndexPage):
-    class Meta:
-        verbose_name = u'从业者首页'
 
 
 # Contact page

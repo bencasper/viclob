@@ -6,7 +6,7 @@
 
 {% block body %}
 {% get_site_root as site_root %}
-{% get_nav_items as navitems %}
+{% get_nav_items homepage=self as navitems %}
 
 <section id="services">
     <div class="container" style="margin-bottom:100px">
@@ -21,12 +21,17 @@
         </div>
     </div>
     <div class="container">
+        <div class="row text-center">
+            <h1>网络视频发行应用服务商</h1>
+        </div>
         <div class="row">
             {% for navitem in navitems %}
             <div class="col-lg-4 col-md-6 text-center">
                 <div class="service-box nav">
                     <a href="{% pageurl navitem %}">
-                        <i class="fa fa-4x {{ navitem.fa}} text-primary sr-icons"></i>
+                        <!--<i class="fa fa-4x {{ navitem.fa}} text-primary sr-icons"></i>-->
+                        <img src="{% static 'images/'%}{{ navitem.icon }}">
+
                     </a>
                     <li class="{% if navitem.show_dropdown %}dropdown{% endif %}{% if navitem.active %} active{% endif %}">
                         {% if navitem.show_dropdown %}

@@ -10,6 +10,8 @@
 {% block content %}
 {% get_site_root as site_root %}
 
+{% news_sub_navitems calling_page=self as subs%}
+
 
 <div class="container">
 
@@ -28,8 +30,8 @@
         <div class="col-lg-3">
 
             <ul class="nav nav-list text-center">
-                {% for sub in self.subs %}
-                <li><a href="{%pageurl sub%}"> {{ sub.title}} </a></li>
+                {% for sub in subs %}
+                <li class="{% if sub.active %} active{% endif %}"><a href="{%pageurl sub %}"> {{ sub.title}} </a></li>
                 {% endfor %}
             </ul>
 
@@ -50,28 +52,31 @@
 
         <div class="col-lg-9">
             <div class="row">
-                {% for content in self.contents %}
+                {% for content in contents %}
 
                 <div class="content col-lg-8">
 
 
                     <h3><a href="{% pageurl content %} "> {{ content.title }} </a></h3>
 
-                    <h4>{{ content.author }} {{ content.date }} 阅读数 {{content.hit_count.hits}}</h4>
-
-                    {% for tag in content.tags.all %}
-                    <a href="{% pageurl self %}?tag={{ tag }}"
-                       class="btn btn-primary btn-xs">
-                        <i class="glyphicon glyphicon-tag"></i> {{ tag }}
-                    </a>
-                    {% endfor %}
-
+                    <h4><a href="{% pageurl self %}?author={{content.author}}"> {{ content.author }} </a> {{ content.date | date:"Y-m-d" }} 阅读数 {{content.hit_count.hits}}</h4>
 
                     {% for child in content.body %}
                     {% if child.block_type == 'intro' %}
                     <div class="well">{{ child }}</div>
                     {% endif %}
                     {% endfor %}
+
+                    {% if content.tags.all %}
+                    <i class="glyphicon glyphicon-tag"></i>
+                    {% endif %}
+                    {% for tag in content.tags.all %}
+                    <a href="{% pageurl self %}?tag={{ tag }}"
+                       class="btn  btn-xs">
+                        {{ tag }}
+                    </a>
+                    {% endfor %}
+
                 </div>
 
                 <div class="col-lg-4">
@@ -84,18 +89,21 @@
                 {% endfor %}
             </div>
 
-            <div class="row">
-                <div class="col-lg-8">
-                    {% include 'home/include/prev_next.html' %}
-                </div>
-            </div>
-
-            <!--<nav aria-label="">-->
-            <!--<ul class="pager">-->
-            <!--<li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> 前一页</a></li>-->
-            <!--<li class="next"><a href="#">后一页 <span aria-hidden="true">&rarr;</span></a></li>-->
-            <!--</ul>-->
-            <!--</nav>-->
+            <!--<div class="row">-->
+                <!--<div class="col-lg-8">-->
+                    <!--{% include 'home/include/prev_next.html' %}-->
+                <!--</div>-->
+            <!--</div>-->
+            {% if contents %}
+            <nav aria-label="">
+                <ul class="pager nav nav-list">
+                    <li class=""><a href="{% pageurl self %}?page=1&tag={{ tag }}"><span aria-hidden="true">首页</span></a></li>
+                    <li class="{% if not pre %}disabled {% endif %}"><a href="{% pageurl self %}?page={{pre}}&tag={{ tag }}"><span aria-hidden="true">pre</span></a></li>
+                    <li class="{% if not next %} disabled {% endif %}"><a href="{% pageurl self %}?page={{next}}&tag={{ tag }}"><span aria-hidden="true">next</span></a></li>
+                    <li class=""><a href="{% pageurl self %}?page={{next}}&tag={{ tag }}"><span aria-hidden="true">尾页</span></a></li>
+                </ul>
+            </nav>
+            {% endif %}
         </div>
     </div>
 

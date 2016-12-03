@@ -17,9 +17,10 @@
     </div>
 
     <h2>
-        {{ self.title }}
+        {{ self.title }} <br />
         {% if self.date %}
-        <small>{{ self.date }}</small>
+        <small>{{ self.author }}</small>
+        <small>{{ self.date | date:"Y-m-d"}}</small>
         {% endif %}
     </h2>
 

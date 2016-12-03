@@ -68,6 +68,14 @@ border-color: rgba(255, 255, 255, 0.3);
     color: #F05F40 !important;
 }
 
+
+li.active > a,
+li.active > a:focus {
+  color: #F05F40 !important;
+  font-weight: bold;
+  background-color: transparent;
+}
+
 .navbar-default .nav > li.active > a,
 .navbar-default .nav > li.active > a:focus {
   color: #F05F40 !important;

@@ -4,7 +4,7 @@ from django import template
 from django.conf import settings
 from wagtail.wagtailcore.models import Page
 
-from home.models import NavigationPage
+from home.models import NavigationPage, HomePage, NewsIndexPage
 
 register = template.Library()
 
@@ -14,16 +14,18 @@ register = template.Library()
 def get_google_maps_key():
     return getattr(settings, 'GOOGLE_MAPS_KEY', "")
 
+
 @register.assignment_tag(takes_context=True)
 def get_current_user(context):
     print context['request'].user
     return context['request'].user
 
+
 @register.assignment_tag(takes_context=True)
 def get_site_root(context):
     # NB this returns a core.Page, not the implementation-specific model used
     # so object-comparison to self will return false as objects would differ
-    return context['request'].site.root_page.get_children()[0]
+    return context['request'].site.root_page
 
 
 @register.assignment_tag(takes_context=True)
@@ -38,25 +40,40 @@ def has_menu_children(page):
 
 
 @register.assignment_tag
-def get_nav_items():
+def get_nav_items(homepage):
     navitems = []
-    menuitems = NavigationPage.objects.all().first().get_children().live().in_menu()
+    menuitems = homepage.get_children().live().in_menu()
     for menuitem in menuitems:
         menuitem.show_dropdown = has_menu_children(menuitem)
         if menuitem.title == u'解决方案':
             menuitem.fa = 'fa-cloud'
-            menuitem.menu_priority = 10;
+            menuitem.icon = 'solution.png'
+            menuitem.menu_priority = 10
             navitems.append(menuitem)
-        elif menuitem.title == u'资讯':
+        elif menuitem.title == u'行业资讯':
             menuitem.fa = 'fa-paper-plane'
-            menuitem.menu_priority = 9;
+            menuitem.icon = 'news.png'
+            menuitem.menu_priority = 9
             navitems.append(menuitem)
         elif menuitem.title == u'云服务商':
             menuitem.fa = 'fa-video-camera'
-            menuitem.menu_priority = 8;
+            menuitem.menu_priority = 8
+            menuitem.icon = 'provider.png'
             navitems.append(menuitem)
 
     navitems.sort(key=lambda x: x.menu_priority, reverse=True)
+    return navitems
+
+
+@register.assignment_tag
+def news_sub_navitems(calling_page=None):
+    news_indexpage = NewsIndexPage.objects.first()
+    navitems = news_indexpage.get_children().live().in_menu()
+    for navitem in navitems:
+        navitem.active = (calling_page.url.startswith(navitem.url) if calling_page else False)
+        print calling_page.url
+        print navitem.url
+    print navitems
     return navitems
 
 
@@ -65,25 +82,31 @@ def get_nav_items():
 # a dropdown class to be applied to a parent
 @register.inclusion_tag('home/tags/top_menu.html', takes_context=True)
 def top_menu(context, parent, calling_page=None):
+    navitems = []
     menuitems = parent.get_children().live().in_menu()
     for menuitem in menuitems:
-        if menuitem.title == u'从业者':
-            menuitem.fa = 'fa-paper-plane'
-        if menuitem.title == u'资讯':
-            menuitem.fa = 'fa-newspaper-o'
-        elif menuitem.title == u'服务商':
-            menuitem.fa = 'fa-video-camera'
+        menuitem.menu_priority = 0
+        navitems.append(menuitem)
+        if menuitem.title == u'行业资讯':
+            menuitem.menu_priority = 10
+        elif menuitem.title == u'解决方案':
+            menuitem.menu_priority = 9
+        elif menuitem.title == u'云服务商':
+            menuitem.menu_priority = 8
+        elif menuitem.title == u'案例':
+            menuitem.menu_priority = 7
         elif menuitem.title == u'联系我们':
-            menuitem.fa = 'fa-phone'
+            menuitem.menu_priority = 0
         menuitem.show_dropdown = has_menu_children(menuitem)
         # We don't directly check if calling_page is None since the template
         # engine can pass an empty string to calling_page
         # if the variable passed as calling_page does not exist.
-        menuitem.active = (calling_page.url.startswith(menuitem.url)
-                           if calling_page else False)
+        menuitem.active = (calling_page.url.startswith(menuitem.url) if calling_page else False)
+
+    navitems.sort(key=lambda x: x.menu_priority, reverse=True)
     return {
         'calling_page': calling_page,
-        'menuitems': menuitems,
+        'menuitems': navitems,
         # required by the pageurl tag that we want to use within this template
         'request': context['request'],
     }
@@ -91,9 +114,11 @@ def top_menu(context, parent, calling_page=None):
 
 # Retrieves the children of the top menu items for the drop downs
 @register.inclusion_tag('home/tags/top_menu_children.html', takes_context=True)
-def top_menu_children(context, parent):
+def top_menu_children(context, parent, calling_page=None):
     menuitems_children = parent.get_children()
     menuitems_children = menuitems_children.live().in_menu()
+    for menuitem in menuitems_children:
+        menuitem.active = (calling_page.url.startswith(menuitem.url) if calling_page else False)
     return {
         'parent': parent,
         'menuitems_children': menuitems_children,
