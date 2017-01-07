@@ -4,7 +4,7 @@
 {% get_current_user as user%}
 
 <div class="vdp-con">
-    <a href="{% pageurl homepage %}" class="logo"><img src="{% static 'images/logo.png' %}"></a>
+    <a href="{% pageurl site_root %}" class="logo"><img src="{% static 'images/logo.png' %}"></a>
     {% for menuitem in menuitems %}
         <a href="{% pageurl menuitem %}" class="{% if menuitem.active %}active{% endif %}">{{ menuitem.title }}</a>
     {% endfor %}
