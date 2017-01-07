@@ -42,10 +42,66 @@
 
                 {% endfor %}
             </ul>
-        <div class="more"><a href="#" class="btn-more">点击加载更多</a></div>
+        <div class="more"><a href="javascript:void(0)" id="more" class="btn-more">点击加载更多</a></div>
         </div>
     </div>
 <!--con /e-->
 
 
+{% endblock %}
+
+
+{% block js %}
+<script src="{% static 'js/libs/jquery.min.js' %}"></script>
+
+<script>
+    $(function(){
+        var currentPage = 1;
+
+        var pageNum;
+
+        $.get('/news/?ajax=1&page=1', function(data){
+                pageNum = data.pageNum
+
+                if(currentPage >= pageNum){
+                    $('#more').hide()
+                }
+
+
+            })
+
+        $('#more').on('click', function(){
+            currentPage = currentPage + 1
+            $.get('/news/?ajax=1&page='+currentPage, function(data){
+
+                $.each(data.list, function(k, v){
+                    var news =
+                        '<li class="clearfix">'
+                    +   '<div class="img-box">'
+                    +   '<a href="'+ v.url +'">'
+                    +   '<img src="'+ v.thumbnail +'" />'
+                    +   '</a>'
+                    +   '</div>'
+                    +   '<div class="infos">'
+                    +   '<h1><a href="'+ v.url +'">'+ v.title +'</a></h1>'
+                    +   '<p class="txt mt-10">'
+                    +   v.intro
+                    +   '</p>'
+                    +   '<p class="txt-bottom"><span class="line">/</span><span class="editer">'+ v.author +'</span>·<span class="time"> '+ v.date +'</span></p>'
+                    +   '</div></li>'
+
+                    $('.new-list').append(news)
+
+                })
+
+                if(currentPage >= pageNum){
+                    $('#more').hide()
+                }
+            })
+
+        })
+
+    })
+
+</script>
 {% endblock %}

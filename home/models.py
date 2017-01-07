@@ -2,6 +2,7 @@
 
 from __future__ import absolute_import, unicode_literals
 
+import json
 from random import randint
 
 from django.contrib.contenttypes.models import ContentType
@@ -194,14 +195,19 @@ class IndexPage(MenuPage):
         print contents.count()
         # Pagination
         page = request.GET.get('page')
+        pageSize = 2
+
+        print 'page debug'
+        print page
         if not page:
             page = 1
-        paginator = Paginator(contents, 5)  # Show 5 contents per page
+        paginator = Paginator(contents, pageSize)  # Show  contents per page
         try:
             contents = paginator.page(page)
         except PageNotAnInteger:
             contents = paginator.page(1)
         except EmptyPage:
+            print 'emptyPage'
             contents = paginator.page(paginator.num_pages)
 
         # Update template context
@@ -213,12 +219,16 @@ class IndexPage(MenuPage):
 
         context['contents'] = contents
         context['pagecount'] = page_count
+        if page_count % pageSize == 0:
+            context['pageNum'] = page_count / pageSize
+        else:
+            context['pageNum'] = page_count / pageSize + 1
         if page > 1:
             context['pre'] = int(page) - 1
 
         print page, page_count
-        print int(page) * 5 < page_count
-        if int(page) * 5 < page_count:
+        print int(page) * pageSize < page_count
+        if int(page) * pageSize < page_count:
             print '----next----'
             context['next'] = int(page) + 1
         if tag:
@@ -230,15 +240,34 @@ class IndexPage(MenuPage):
         print 'serve'
 
         context = self.get_context(request, *args, **kwargs)
-        for content in context['contents']:
-            print 'debug'
-            print content
 
-        return TemplateResponse(
-            request,
-            self.get_template(request, *args, **kwargs),
-            context
-        )
+        if "ajax" in request.GET:
+            currentPage = request.GET.get('page')
+            if not currentPage:
+                currentPage = 1
+            list = []
+            for content in context['contents']:
+                article = {'title': content.title, 'thumbnail': content.thumbnail.file.url, 'author': content.author,
+                           'date': content.date.strftime('%Y-%m-%d'), 'url': content.url}
+                for child in content.body:
+                    if child.block_type == 'intro':
+                        article['intro'] = child.value.source
+                list.append(article)
+
+            content = {'pageNum': context['pageNum'],'currentPage': currentPage, 'list': list}
+            response = HttpResponse(
+                json.dumps(content),
+                # list,
+                content_type='application/json',
+            )
+            return response
+        else:
+
+            return TemplateResponse(
+                request,
+                self.get_template(request, *args, **kwargs),
+                context
+            )
 
 
 IndexPage.content_panels = [
