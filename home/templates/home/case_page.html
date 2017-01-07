@@ -12,7 +12,7 @@
 <!--con /s-->
 <div class="vdp-contain vdp-contain-bg">
     <div class="vdp-con vdp-case">
-        <h3 class="dvp-title02">合作案例</h3>
+        <h3 class="dvp-title02">部分客户</h3>
         <p class="txt">下面的小伙伴都在用云途VDP，期待你的加入。</p>
         <div class="parter">
             <span class="p-btn-l arrow-l-big"></span>
@@ -37,21 +37,32 @@
                 </div>
             </div>
         </div>
-        <div class="case">
-            <h4 class="title">案例展示</h4>
-            <span class="btn-l arrow-l-small"></span>
-            <span class="btn-r arrow-r-small"></span>
-            <div class="swiper-container02">
-                <div class="swiper-wrapper clearfix">
-                    <div class="swiper-slide clearfix">
-                        {% for videoItem in self.case_videos.all %}
-                        <div class="video-box">
-                            {{ videoItem.code }}
-                        </div>
-                        {% endfor %}
-                    </div>
-                    <div class="swiper-slide clearfix">
+        <!--case/s-->
+        <div class="bg-white">
+            <div class="vdp-con vdp-case">
+                <div class="case">
 
+                    <h4 class="title">部分案例</h4>
+                    <span class="btn-l arrow-l-small"></span>
+                    <span class="btn-r arrow-r-small"></span>
+                    <div class="swiper-container02">
+                        <div class="swiper-wrapper clearfix">
+                            <div class="swiper-slide clearfix">
+                                {% for videoItem in self.case_videos.all %}
+                                <div class="video-box">
+                                    <div class="video">
+                                        {{ videoItem.code }}
+                                    </div>
+                                    <div class="name">
+                                        {{ videoItem.title }}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="swiper-slide clearfix">
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -85,5 +96,7 @@
 
 
     })
+
+
 </script>
 {% endblock %}

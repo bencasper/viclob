@@ -49,7 +49,7 @@ def get_nav_items(homepage):
             menuitem.icon = 'solution.png'
             menuitem.menu_priority = 10
             navitems.append(menuitem)
-        elif menuitem.title == u'行业资讯':
+        elif menuitem.title == u'行业分享':
             menuitem.fa = 'fa-paper-plane'
             menuitem.icon = 'news.png'
             menuitem.menu_priority = 9
@@ -95,7 +95,7 @@ def top_menu(context, parent, calling_page=None):
     menuitems = parent.get_children().live().in_menu()
     for menuitem in menuitems:
         menuitem.menu_priority = 0
-        if menuitem.title == u'行业资讯':
+        if menuitem.title == u'行业分享':
             menuitem.menu_priority = 8
             navitems.append(menuitem)
         elif menuitem.title == u'解决方案':
