@@ -49,8 +49,9 @@
             <span class="btn-r arrow-r-small"></span>
             <div class="swiper-container02">
                 <div class="swiper-wrapper clearfix">
+                    {% for sublist in self.contents %}
                     <div class="swiper-slide clearfix">
-                        {% for videoItem in self.case_videos.all %}
+                        {% for videoItem in sublist %}
                         <div class="video-box">
                             <div class="video">
                                 {{ videoItem.code }}
@@ -61,18 +62,8 @@
                         </div>
                         {% endfor %}
                     </div>
-                    <div class="swiper-slide clearfix">
-                        {% for videoItem in self.case2_videos.all %}
-                        <div class="video-box">
-                            <div class="video">
-                                {{ videoItem.code }}
-                            </div>
-                            <div class="name">
-                                {{ videoItem.title }}
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
+                    {% endfor %}
+
                 </div>
             </div>
         </div>
@@ -108,6 +99,8 @@
 
 
     })
+
+
 
 
 

@@ -5,6 +5,7 @@ from __future__ import absolute_import, unicode_literals
 import json
 from random import randint
 
+import itertools
 from django.contrib.contenttypes.models import ContentType
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
@@ -76,11 +77,35 @@ class CasePageCaseItem(Orderable, CaseItem):
 class CasePageVideoItem(Orderable, VideoItem):
     page = ParentalKey('home.CasePage', related_name='case_videos')
 
+
 class CasePageVideo2Item(Orderable, VideoItem):
     page = ParentalKey('home.CasePage', related_name='case2_videos')
 
 
 class CasePage(MenuPage):
+    @property
+    def contents(self):
+
+        contents = []
+        videos1 = self.case_videos.all()
+        videos2 = self.case2_videos.all()
+
+        count = 0
+        sublist = []
+        for item in itertools.chain(videos1, videos2):
+            print item
+            sublist.append(item)
+            print sublist
+            count += 1
+
+            if count == 6:
+                contents.append(sublist)
+                sublist = []
+                count = 0
+
+        contents.append(sublist)
+        return contents
+
     class Meta:
         verbose_name = u'案例页面'
 
@@ -258,7 +283,7 @@ class IndexPage(MenuPage):
                         article['intro'] = child.value.source
                 list.append(article)
 
-            content = {'pageNum': context['pageNum'],'currentPage': currentPage, 'list': list}
+            content = {'pageNum': context['pageNum'], 'currentPage': currentPage, 'list': list}
             response = HttpResponse(
                 json.dumps(content),
                 # list,
