@@ -224,7 +224,7 @@ class IndexPage(MenuPage):
         print contents.count()
         # Pagination
         page = request.GET.get('page')
-        pageSize = 2
+        pageSize = 10
 
         print 'page debug'
         print page
