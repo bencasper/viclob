@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+{% load viclob_tags wagtailcore_tags static %}
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>VICLOB</title>
+    <link rel="shortcut icon" href="{% static 'images/favicon-test.ico' %}" />
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css'%}"/>
+    <link rel="stylesheet" href="{% static 'css/viclob.css' %}">
+    <script type="text/javascript" src="{% static 'js/solution.css.js' %}"></script>
+
+</head>
+
+<body>
+
+
+{% block content %}
+{% get_site_root as site_root %}
+
+
+<!-- Service Tabs -->
+<div class="fullpage">
+    <div class="section">
+        {% get_site_root as site_root %}
+        {% top_menu parent=site_root calling_page=self %}
+    </div>
+    <div class="section" style="margin-top:80px;">
+
+
+    </div>
+    <!--发行平台-->
+    <div class="section">
+        <div class="container">
+            <div class="row text-center" style="color:#6f7e94; padding-bottom:50px;">
+                <div class="col-lg-4 line"></div>
+                <div class="col-lg-4">
+                    <h1 class="iconfont">云途VDP（Video Distribution Platform）</h1>
+                    <h1 class="iconfont">视频全网发行平台</h1>
+                </div>
+                <div class="col-lg-4 line"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="lcps-wrap">
+                        <div class="lcps-content">
+                            <!--<p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>-->
+                            <div class="lcps-desc-wrap">
+                                <p><i class="iconfont">&#xe6cc;</i>服务于企业、自媒体、PGC等内容方</p>
+                                <p><i class="iconfont">&#xe6cc;</i>整合内容、技术、渠道优势资源，提供视频制作、云视频、全网发行的垂直服务链</p>
+                                <p><i class="iconfont">&#xe6cc;</i>致力于重塑视频生态营销价值</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <img src="{% static 'images/publish_platform.png' %}" alt="">
+                </div>
+                <div class="col-lg-4"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--内容制作-->
+    <div class="section" style="padding-top:50px;">
+        <div class="container">
+            <div class="row text-center" style="color:#6f7e94; padding-bottom:50px;">
+                <div class="col-lg-4 line"></div>
+                <div class="col-lg-4">
+                    <h1 class="iconfont">内容制作</h1>
+                </div>
+                <div class="col-lg-4 line"></div>
+            </div>
+            <div class="row">
+                <div class="lcps-wrap" style="float:left;">
+                    <div class="lcps-content">
+                        <div class="lcps-desc-wrap">
+                            <p><i class="iconfont">&#xe6cc;</i>聚焦企业场景化应用，线下专业拍摄执行团队</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/market.png'%}" width="120" height="80">
+                    <div>企业市场传播</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/bbs.png'%}" width="120" height="80">
+                    <div>峰会论坛</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/finance.png'%}" width="120" height="80">
+                    <div>金融直播</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/games.png'%}" width="120" height="80">
+                    <div>赛事直播</div>
+                </div>
+
+            </div>
+            <div class="row" style="padding-top:50px;">
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/cele.png'%}" width="120" height="80">
+                    <div>演出年会</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/diago.png'%}" width="120" height="80">
+                    <div>医疗直播</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/classroom.png'%}" width="120" height="80">
+                    <div>网络互动课堂</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/meeting.png'%}" width="120" height="80">
+                    <div>视频会议</div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="lcps-wrap" style="float:left;">
+                    <div class="lcps-content">
+                        <!--<p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>-->
+                        <div class="lcps-desc-wrap">
+                            <p><i class="iconfont">&#xe6cc;</i>关注客户内容营销诉求，电影级拍摄制作水平</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-top:50px;">
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/cartoon.png'%}" width="120" height="80">
+                    <div>动漫作品</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/ad.png'%}" width="120" height="80">
+                    <div>TVC广告</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/subject.png'%}" width="120" height="80">
+                    <div>专题/宣传/纪录片</div>
+                </div>
+                <div class="col-lg-3 text-center">
+                    <img src="{% static 'images/tv.png'%}" width="120" height="80">
+                    <div>电视栏目</div>
+                </div>
+
+            </div>
+
+            <div class="row" style="padding-top:20px;">
+                <div class="lcps-wrap" style="float:left;">
+                    <div class="lcps-content">
+                        <!--<p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>-->
+                        <div class="lcps-desc-wrap">
+
+                            <p><img src="{% static 'images/tip.png'%}" width="20" height="20">
+                                去看看作品展示</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--接入流程-->
+    <div class="section">
+        <div class="container">
+            <div class="row text-center" style="color:#6f7e94; padding-bottom:20px;">
+                <div class="col-lg-4 line"></div>
+                <div class="col-lg-4">
+                    <h1 class="iconfont">云视频saas服务，企业一站式网络视频应用平台</h1>
+                    <h1 class="iconfont">接入流程</h1>
+                </div>
+                <div class="col-lg-4 line"></div>
+            </div>
+
+            <div class="row">
+                <div class="lcps-wrap" style="float:left;">
+                    <div class="lcps-content">
+                        <!--<p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>-->
+                        <div class="lcps-desc-wrap">
+                            <p><i class="iconfont">&#xe6cc;</i>企业点播视频／直播流推送至云平台，自动转码、存储、加密和分发加速
+                                并提供媒体库、播放器设置、数据分析等丰富的运营级增值服务功能</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                    <img src="{% static 'images/process.png' %}" alt="">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--点播平台-->
+    <div class="section" style="padding-bottom:50px;">
+        <div class="container">
+            <div class="row text-center" style="color:#6f7e94; padding-bottom:20px;">
+                <div class="col-lg-4 line"></div>
+                <div class="col-lg-4">
+                    <h1 class="iconfont">视频点播saas平台</h1>
+                    <h1 class="iconfont"></h1>
+                </div>
+                <div class="col-lg-4 line"></div>
+            </div>
+
+            <div class="row">
+                <div class="lcps-wrap" style="float:left;">
+                    <div class="lcps-content">
+                        <!--<p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>-->
+                        <div class="lcps-desc-wrap">
+                            <p><i class="iconfont">&#xe6cc;</i>视频上传、转码、存储、加速、媒资库、加密、播放器、数据统计等一站式服务</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1"></div>
+
+                <div class="col-lg-10">
+                    <img src="{% static 'images/saas.png' %}" alt="">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--直播-->
+    <div class="section">
+        <div id="container" class="product-wrap clearfix">
+            <div class="player-wrap">
+                <div id="player"></div>
+                <img src="{% static 'images/product-bg.jpg' %}" alt="">
+                <!--地球-->
+                <div id="earth-wrap" class="earth-wrap">
+                    <p class="earth-top"><i class="iconfont">&#xe6cb;</i>开放兼容直播方式</p>
+                    <div class="earth-hover-wrap"></div>
+                    <img src="{% static 'images/earth.png' %}" alt="" class="earth">
+                    <p class="app-download">
+                        软件下载：
+                        <a href="http://cdn13.mudu.tv/tools/mudutv_desktop_publisher.zip"
+                           target="_blank">目睹直播编码工具</a>
+                        <a href="http://pan.baidu.com/s/1skJoNu9" target="_blank">OBS编码软件</a>
+                    </p>
+                    <p class="earth-more">
+                        <a href="/?a=scenearticle&id=19" target="_blank">了解更多>></a>
+                    </p>
+                    <div class="earth-item-wrap" data-current-index="1">
+                        <img src="{% static 'images/earth-item-1.png' %}" alt="" data-index="1">
+                        <img src="{% static 'images/earth-item-2.png' %}" alt="" data-index="2">
+                        <img src="{% static 'images/earth-item-3.png' %}" alt="" data-index="3">
+                        <img src="{% static 'images/earth-item-4.png' %}" alt="" data-index="4">
+                        <img src="{% static 'images/earth-item-5.png' %}" alt="" data-index="5">
+                        <img src="{% static 'images/earth-items.png' %}" alt="" class="earth-items">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--云导播台-->
+    <div class="section">
+        <div class="lcps-wrap">
+            <img src="{% static 'images/product-lcps.jpg' %}" alt="">
+            <div class="lcps-content">
+                <p><span class="sprite-product-lcps"></span></p>
+                <!--<p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>-->
+                <div class="lcps-desc-wrap">
+                    <p><i class="iconfont">&#xe6cc;</i>多路音、视频流切换</p>
+                    <p><i class="iconfont">&#xe6cc;</i>画中画效果、多画面重构</p>
+                    <p><i class="iconfont">&#xe6cc;</i>台标、字幕、动画、比分等元素合成</p>
+                    <p><i class="iconfont">&#xe6cc;</i>延时播出，宣传片切换，跨地域直播等场景应用</p>
+                </div>
+                <p class="lcps-link"><a href="/?a=scenearticle&id=1">了解云导播台详情>></a></p>
+            </div>
+        </div>
+    </div>
+
+
+    <!--专属频道-->
+    <div class="section" style="background-color: rgb(215, 234, 255);">
+        <div class="channel-wrap">
+            <div class="channel-show-wrap">
+                <div class="channel-tip-wrap">
+                    <img src="{% static 'images/product-tip-1.gif' %}" alt="">
+                    <img src="{% static 'images/product-tip-2.gif' %}" alt="" style="margin-top: 130px">
+                    <img src="{% static 'images/product-tip-3.gif' %}" alt="" style="margin-top: 120px">
+                    <img src="{% static 'images/product-tip-4.gif' %}" alt="" style="margin-top: 120px">
+                    <img src="{% static 'images/product-tip-5.gif' %}" alt="" style="margin-top: 110px">
+                    <img src="{% static 'images/product-tip-6.gif' %}" alt="" style="margin-top: 120px">
+                    <img src="{% static 'images/product-tip-7.gif' %}" alt="" style="margin-top: 110px">
+                    <img src="{% static 'images/product-tip-8.gif' %}" alt="">
+                    <img src="{% static 'images/product-tip-9.gif' %}" alt="" style="margin-top: 100px">
+                    <img src="{% static 'images/product-tip-10.gif' %}" alt="" style="margin-top: 100px">
+                    <img src="{% static 'images/product-tip-11.gif' %}" alt="">
+                    <img src="{% static 'images/product-tip-12.gif' %}" alt="">
+                </div>
+                <img src="{% static 'images/product-channel-1.png' %}" alt="">
+                <img src="{% static 'images/product-channel-2.gif' %}" alt="">
+                <img src="{% static 'images/product-channel-3.png' %}" alt="">
+                <img src="{% static 'images/product-channel-4.png' %}" alt="">
+                <img src="{% static 'images/product-channel-5.gif' %}" class="middle" alt="">
+                <img src="{% static 'images/product-channel-6.gif' %}" alt="">
+                <img src="{% static 'images/product-channel-7.gif' %}" class="bottom" alt="">
+                <img src="{% static 'images/product-channel-8.gif' %}" class="bottom" alt="">
+                <img src="{% static 'images/product-channel-9.gif' %}" class="bottom" alt="">
+                <img src="{% static 'images/product-channel-10.gif' %}" class="bottom" alt="">
+                <img src="{% static 'images/product-channel-11.gif' %}" class="bottom" alt="">
+                <img src="{% static 'images/product-channel-12.png' %}" class="bottom" alt="">
+            </div>
+            <div class="channel-content">
+                <p><span class="sprite-product-channel"></span></p>
+                <p>自定义配置观看页面和互动方式 适用不同场景</p>
+                <p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>
+                <div class="channel-selection-wrap">
+                    <div class="channel-selection-box">
+                        <span class="white-spr"></span>
+                        <span class="selection-btn"><i></i>直播引导图</span>
+                        <span class="selection-btn"><i></i>倒计时</span>
+                        <span class="selection-btn"><i></i>播放器背景</span>
+                        <span class="selection-btn"><i></i>自定义LOGO</span>
+                        <span class="selection-btn"><i></i>广告栏(链接)</span>
+                        <span class="selection-btn"><i></i>客户化定制</span>
+                    </div>
+                    <div class="channel-selection-box">
+                        <span class="white-spr"></span>
+                        <span class="selection-btn"><i></i>自定义信息菜单</span>
+                        <span class="selection-btn"><i></i>聊天互动页面</span>
+                        <span class="selection-btn"><i></i>投票问卷</span>
+                        <span class="selection-btn"><i></i>打赏</span>
+                        <span class="selection-btn"><i></i>图文简介页面</span>
+                        <span class="selection-btn"><i></i>精彩视频页面</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--互动视频-->
+    <div class="section">
+        <div class="video-wrap">
+            <p><span class="sprite-product-video"></span></p>
+            <p>可配置互动样式和观看权限 跨平台互融互动</p>
+            <p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>
+            <div class="video-content">
+                <div class="video-show-wrap">
+                    <img src="{% static 'images/video-show-1.gif' %}" alt="">
+                    <img src="{% static 'images/video-show-2.gif' %}" alt="">
+                    <img src="{% static 'images/video-show-3.gif' %}" alt="">
+                    <img src="{% static 'images/video-show-4.gif' %}" alt="">
+                </div>
+                <div class="video-selection-wrap">
+                    <div class="selection-btn">
+                        <i class="iconfont">&#xe6d5;</i>
+                        <div class="invisible">付费、验证码、白名单、关注微信后观看等</div>
+                    </div>
+                    <p>授权观看</p>
+                    <div class="selection-btn m">
+                        <i class="iconfont">&#xe6d4;</i>
+                        <div class="invisible">播放器下方的广告栏，可设置跳转链接及其它平台入口</div>
+                    </div>
+                    <p>广告栏及入口</p>
+                    <div class="selection-btn">
+                        <i class="iconfont">&#xe6d3;</i>
+                        <div class="invisible">通过播放器嵌入页面、嵌入微信，实现媒体融合</div>
+                    </div>
+                    <p>融媒体</p>
+                    <div class="selection-btn l">
+                        <i class="iconfont">&#xe6d2;</i>
+                        <div class="invisible">可配置弹幕、聊天、打赏、红包、问卷、话题等等互动形式</div>
+                    </div>
+                    <p>观众互动</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--数据分析-->
+    <div class="section" style="background-color: rgb(255, 255, 255);">
+        <div class="analysis-wrap">
+            <p><span class="sprite-product-analysis"></span></p>
+            <p>可配置互动样式和观看权限 跨平台互融互动</p>
+            <p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>
+            <div class="analysis-selection-wrap">
+                <div class="selection-btn active">
+                    <p><i class="sprite-analysis-watch"></i></p>
+                    <p><span>实时反馈观众进入时间，退出时间、观看设备、观看环境</span></p>
+                </div>
+                <div class="selection-btn">
+                    <p><i class="sprite-analysis-area"></i></p>
+                    <p><span>可视化的观众分布，了解受众人群的地域属性</span></p>
+                </div>
+                <div class="selection-btn">
+                    <p><i class="sprite-analysis-userinfo"></i></p>
+                    <p><span>通过参与性互动配置，留存观众的关键信息，手机号码等，为<br>商业活动做用户挖掘</span></p>
+                </div>
+                <div class="selection-btn">
+                    <p><i class="sprite-analysis-time"></i></p>
+                    <p><span>实时访问时长数据，波峰值数据，具体到每一时刻的在线人数曲线图</span></p>
+                </div>
+            </div>
+            <div class="analysis-show-wrap">
+                <img src="{% static 'images/analysis-show-1.gif' %}" alt="">
+                <img src="{% static 'images/analysis-show-2.gif' %}" alt="">
+                <img src="{% static 'images/analysis-show-3.gif' %}" alt="">
+                <img src="{% static 'images/analysis-show-4.gif' %}" alt="">
+            </div>
+        </div>
+    </div>
+    <!--云媒体库-->
+    <div class="section">
+        <div class="media-wrap">
+            <p><span class="sprite-product-media"></span></p>
+            <p>可配置互动样式和观看权限 跨平台互融互动</p>
+            <p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>
+            <div class="media-show-wrap">
+                <i class="selection-btn sprite-media-yellow top-left"></i>
+                <i class="selection-btn sprite-media-blue top-right"></i>
+                <i class="selection-btn sprite-media-orange bottom-right"></i>
+                <i class="selection-btn sprite-media-green bottom-left"></i>
+                <div class="media-tip-wrap">
+                    <div class="media-tip-box top-left">
+                        <p class="title">视频上传、下载</p>
+                        <p class="desc">支持外部视频上传，并嵌入频道点播；支持随时下载</p>
+                    </div>
+                    <div class="media-tip-box top-right">
+                        <p class="title">视频实时存储</p>
+                        <p class="desc">直播视频自动存储在媒体库，方便回看、点播取用</p>
+                    </div>
+                    <div class="media-tip-box bottom-right">
+                        <p class="title">视频外嵌</p>
+                        <p class="desc">媒体库视频外嵌至其他站点、Web页面</p>
+                    </div>
+                    <div class="media-tip-box bottom-left">
+                        <p class="title">自动转码</p>
+                        <p class="desc">存储视频将自动由高向低转码成多种格式，不同的清晰格式方便在不同环境中取用</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--VDP-->
+    <div class="section" style="padding-bottom:10px;">
+        <div class="container">
+            <div class="row text-center" style="color:#6f7e94; padding-bottom:50px;">
+                <div class="col-lg-4 line"></div>
+                <div class="col-lg-4">
+                    <h1 class="iconfont">云途VDP</h1>
+                    <h1 class="iconfont">视频全网发行平台</h1>
+                </div>
+                <div class="col-lg-4 line"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                </div>
+                <div class="col-lg-4" style="margin-left:-40px;">
+                    <img src="{% static 'images/vdp.png' %}" alt="">
+                </div>
+                <div class="col-lg-4"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--合作-->
+    <div class="section" style="padding-top:10px;">
+        <div class="container">
+            <div class="row text-center" style="color:#6f7e94; padding-bottom:50px;">
+                <div class="col-lg-4 line"></div>
+                <div class="col-lg-4">
+                    <h1 class="iconfont">云途VDP（Video Distribution Platform）</h1>
+                    <h1 class="iconfont">视频全网发行平台</h1>
+                </div>
+                <div class="col-lg-4 line"></div>
+            </div>
+            <div class="row" style="margin-bottom:50px;">
+                <div class="col-lg-6">
+                    <img src="{% static 'images/diy.png' %}" alt="">
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="lcps-wrap">
+                        <div class="lcps-content">
+                            <!--<p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>-->
+                            <div class="lcps-desc-wrap">
+                                <p><i class="iconfont">&#xe6cc;</i>致力于打造自助式视频全网发行平台，助力视频生态营销传播价值最大化</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row" style="margin-bottom:50px;">
+                <div class="col-lg-6">
+                    <div class="lcps-wrap">
+                        <div class="lcps-content">
+                            <!--<p><a href="/console" class="product-exp-btn"><i class="iconfont">&#xe6d1;</i>立即体验</a></p>-->
+                            <div class="lcps-desc-wrap">
+                                <p><i class="iconfont">&#xe6cc;</i>与主流互联网电视、视频门户、移动新媒体、广电新媒体等网络视频发行渠道建立广泛深入的战略合作关系，搭建领先的内容方／渠道方视频增值服务平台
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="{% static 'images/coop.png' %}" alt="">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--视频全网发行媒体联盟-->
+    <div class="section" style="padding-top:50px; padding-bottom:50px;">
+        <div class="container">
+            <div class="row" style="color:#6f7e94; padding-bottom:50px;">
+                <div class="col-lg-4">
+                    <h1 class="iconfont">视频全网发行媒体联盟</h1>
+                </div>
+            </div>
+            <div class="row text-center" style="color:#6f7e94; padding-bottom:50px;">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-2 line"></div>
+                <div class="col-lg-4">
+                    <img src="{% static 'images/tv-logo.png'%}" width="20" height="20">
+                    <div class="verticalLine"></div>
+                    <p class="iconfont" style="display:inline; vertical-align: top">互联网电视</p>
+                </div>
+                <div class="col-lg-2 line"></div>
+                <div class="col-lg-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/letv.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/manggo.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/xiaomi.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/baishi.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/huashu.png'%}" width="120" height="80">
+                </div>
+
+            </div>
+            <div class="row text-center" style="color:#6f7e94; padding-top: 50px; padding-bottom:50px;">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-2 line"></div>
+                <div class="col-lg-4">
+                    <img src="{% static 'images/vod-logo.png'%}" width="20" height="20">
+                    <div class="verticalLine"></div>
+                    <p class="iconfont" style="display:inline; vertical-align: top">视频门户</p>
+                </div>
+                <div class="col-lg-2 line"></div>
+                <div class="col-lg-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/youku.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/qiy.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/qq.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/sohu.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/levideo.png'%}" width="120" height="80">
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/baidu.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/pptv.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/baofeng.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/acfun.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/bili.png'%}" width="120" height="80">
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/ifeng.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/sina.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/v1.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/xiangchao.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/fengxing.png'%}" width="120" height="80">
+                </div>
+
+            </div>
+
+
+            <div class="row text-center" style="color:#6f7e94; padding-top: 50px; padding-bottom:50px;">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-2 line"></div>
+                <div class="col-lg-4">
+                    <img src="{% static 'images/mobile-logo.png'%}" width="20" height="20">
+                    <div class="verticalLine"></div>
+                    <p class="iconfont" style="display:inline; vertical-align: top">移动新媒体</p>
+                </div>
+                <div class="col-lg-2 line"></div>
+                <div class="col-lg-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/toutiao.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/yidian.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/163.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/sohu-news.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/sina.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/qq-news.png'%}" width="120" height="80">
+                </div>
+
+            </div>
+            <div class="row text-center" style="color:#6f7e94; padding-top: 50px; padding-bottom:50px;">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-2 line"></div>
+                <div class="col-lg-4">
+                    <img src="{% static 'images/broadcast-logo.png'%}" width="20" height="20">
+                    <div class="verticalLine"></div>
+                    <p class="iconfont" style="display:inline; vertical-align: top">广电&新闻媒体</p>
+                </div>
+                <div class="col-lg-2 line"></div>
+                <div class="col-lg-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/people.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/xinhua.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/cntv.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/mtv.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/blue.png'%}" width="120" height="80">
+                </div>
+                <div class="col-lg-2 text-center">
+                    <img src="{% static 'images/jstv.png'%}" width="120" height="80">
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+         var _hmt = _hmt || []; (function() {   var hm = document.createElement('script');   hm.src = '//hm.baidu.com/hm.js?22db863c7d7b02b102cf93831ce76aa6';   var s = document.getElementsByTagName('script')[0];    s.parentNode.insertBefore(hm, s); })();
+
+
+
+    </script>
+    <script>
+
+    var MAX_PAGE_WIDTH = 1920,
+        SINGLE_GROUP_WIDTH = 1200,
+        body_width = $('body').width(),
+        header_li_width = $('#header ul li').width() * body_width / MAX_PAGE_WIDTH,
+        scroll_top = 600;
+
+    var page = 'product';
+
+    //调整header宽度
+    if(body_width < 1200) {
+        $('#header ul li').width(80);
+    } else {
+        $('#header ul li').width(header_li_width);
+    }
+
+    $(window).resize(function() {
+        if($("body").width() > 1300) {
+            $('#header ul li').width($("body").width() / 1200 * 75);
+        }
+    });
+
+    </script>
+
+
+</div>
+
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'js/solution.js' %}"></script>
+
+<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/viclob.js' %}"></script>
+
+{% endblock %}
+
+<div id="fp-nav" class="right" style="margin-top: -98px;">
+    <ul>
+        <li><a href="#" class="active"><span></span></a></li>
+        <li><a href="#" class=""><span></span></a></li>
+        <li><a href="#" class=""><span></span></a></li>
+        <li><a href="#" class=""><span></span></a></li>
+        <li><a href="#" class=""><span></span></a></li>
+        <li><a href="#" class=""><span></span></a></li>
+        <li><a href="#" class=""><span></span></a></li>
+    </ul>
+</div>

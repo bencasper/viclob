@@ -1,66 +1,40 @@
 {% extends "home/base.html" %}
 
 {% load viclob_tags wagtailcore_tags static %}
-{% block menu %}
+
+{% block content %}
+
+<!--con /s-->
+    <div class="vdp-contain">
+        <h3 class="dvp-title01">连接内容与每一个人</h3>
+        <p class="vdp-home-txt">网络内容发行服务商---精准渠道，瞬间触达，深度运营，数据分析</p> 
+        <div class="vdp-con clearfix">
+            <div class="vdp-home clearfix">
+                <div id="chart01" class="charts float-l"></div>
+                <span class="txt txt01">VDP</span>
+                <span class="txt txt02"><i class="icon-camera"></i></span>
+                <span class="txt txt03"><i class="icon-headphones"></i></span>
+                <span class="txt txt04"><i class="icon-tv"></i></span>
+                <span class="txt txt05"><i class="icon-mobile"></i></span>
+                <span class="txt txt06"><i class="icon-display"></i></span>
+                <span class="txt txt07"><i class="icon-laptop"></i></span>
+                <span class="txt txt08"><i class="icon-tablet"></i></span>
+                <span class="txt txt09"><i class="icon-video-camera"></i></span>
+                <span class="txt txt10"><i class="icon-mic"></i></span>
+                <a href="{% pageurl homepage %}" class="btn">点击进入</a>
+            </div>
+        </div>
+    </div>
+<!--con /e-->
+
+
 {% endblock %}
 
-{% block body %}
-{% get_site_root as site_root %}
-{% get_nav_items homepage=self as navitems %}
 
-<section id="services">
-    <div class="container" style="margin-bottom:10px">
-        <div class="row">
-            <div style="float:left; padding-top:5px;">
-                <img src="{% static 'images/viclob_logo.png'%}"/>
-            </div>
-            <div style="float:left;">
-                <h3 class="text-center">盛视云途网络技术（北京）有限公司 </h3>
-                <h4 class="text-center">Vi-Time Networking Technology Co.,Ltd</h4>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row text-center">
-            <h1>网络视频发行应用服务商</h1>
-        </div>
-        <div class="row">
-            {% for navitem in navitems %}
-            <div class="col-lg-4 col-md-6 text-center">
-                <div class="service-box nav">
-                    <a href="{% pageurl navitem %}">
-                        <!--<i class="fa fa-4x {{ navitem.fa}} text-primary sr-icons"></i>-->
-                        <img src="{% static 'images/'%}{{ navitem.icon }}">
+{% block js %}
 
-                    </a>
-                    <li class="{% if navitem.show_dropdown %}dropdown{% endif %}{% if navitem.active %} active{% endif %}">
-                        {% if navitem.show_dropdown %}
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">{{ navitem.title }} <b
-                                class="caret"></b></a>
-                        {% top_menu_children parent=navitem %}
-                        {% else %}
-                        <a href="{% pageurl navitem %}">{{ navitem.title }}</a>
-                        {% endif %}
-                    </li>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-
-</section>
-
-
-{% block footer %}
-
-<div style="position: absolute; bottom:0; background: url({% static 'images/nav-footer.png' %}) no-repeat; background-size: 100%; height:256px; width:100%;">
-
-    <div class="col-lg-12 text-center" style="padding-top:50px;">
-        <h2>从视频内容生产、在线播放到全网发行</h2>
-        <h2>一体化垂直服务链条</h2>
-        <h2>重塑视频生态传播价值</h2>
-    </div>
-</div>
-{% endblock %}
+    <script src="{% static 'js/libs/jquery.min.js' %}"></script>
+    <script src="{% static 'js/plugs/echarts-all-3.js' %}"></script>
+    <script src="{% static 'js/projects/home.js' %}"></script>
 
 {% endblock %}

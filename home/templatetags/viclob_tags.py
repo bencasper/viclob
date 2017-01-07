@@ -44,6 +44,7 @@ def get_nav_items(homepage):
     navitems = []
     menuitems = homepage.get_children().live().in_menu()
     for menuitem in menuitems:
+	print menuitem
         menuitem.show_dropdown = has_menu_children(menuitem)
         if menuitem.title == u'解决方案':
             menuitem.fa = 'fa-cloud'
@@ -57,8 +58,6 @@ def get_nav_items(homepage):
             navitems.append(menuitem)
         elif menuitem.title == u'云服务商':
             menuitem.fa = 'fa-video-camera'
-            menuitem.menu_priority = 8
-            menuitem.icon = 'provider.png'
             navitems.append(menuitem)
 
     navitems.sort(key=lambda x: x.menu_priority, reverse=True)
@@ -99,17 +98,20 @@ def top_menu(context, parent, calling_page=None):
     menuitems = parent.get_children().live().in_menu()
     for menuitem in menuitems:
         menuitem.menu_priority = 0
-        navitems.append(menuitem)
         if menuitem.title == u'行业资讯':
-            menuitem.menu_priority = 10
-        elif menuitem.title == u'解决方案':
-            menuitem.menu_priority = 9
-        elif menuitem.title == u'云服务商':
             menuitem.menu_priority = 8
-        elif menuitem.title == u'案例':
-            menuitem.menu_priority = 7
-        elif menuitem.title == u'联系我们':
+	    navitems.append(menuitem)
+        elif menuitem.title == u'解决方案':
+            menuitem.menu_priority = 10
+	    navitems.append(menuitem)
+        #elif menuitem.title == u'云服务商':
+        #    menuitem.menu_priority = 8
+        elif menuitem.title == u'合作案例':
+            menuitem.menu_priority = 9
+	    navitems.append(menuitem)
+        elif menuitem.title == u'关于我们':
             menuitem.menu_priority = 0
+	    navitems.append(menuitem)
         menuitem.show_dropdown = has_menu_children(menuitem)
         # We don't directly check if calling_page is None since the template
         # engine can pass an empty string to calling_page

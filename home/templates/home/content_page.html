@@ -4,75 +4,14 @@
 
 
 {% block content %}
-{% block heading %}
-<div class="page-header">
-
-    <div class="pull-right">
-        {% for tag in self.tags.all %}
-        <a href="{% pageurl self %}?tag={{ tag }}"
-           class="btn btn-primary btn-xs">
-            <i class="glyphicon glyphicon-tag"></i> {{ tag }}
-        </a>
-        {% endfor %}
-    </div>
-
-    <h2>
-        {{ self.title }} <br />
-        {% if self.date %}
-        <small>{{ self.author }}</small>
-        <small>{{ self.date | date:"Y-m-d"}}</small>
-        {% endif %}
-    </h2>
-
-</div>
-{% endblock %}
 
 {% if self.body %}
-<div class="body-content">
-    {% include "home/include/streamfield.html" with content=self.body %}
+<!--con /s-->
+<div class="vdp-contain vdp-contain-bg">
+    <div class="vdp-con clearfix vdp-news-detail">
+{% include "home/include/streamfield.html" with content=self.body %}
+</div>
 </div>
 {% endif %}
-
-{% endblock %}
-
-{% block comment %}
-
-{% if user.username %}
-
-<div id="disqus_thread"></div>
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = {% pageurl self %};  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = viclob1; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = '//viclob-com.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-
-
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
-    Disqus.</a></noscript>
-
-
-<script id="dsq-count-scr" src="//viclob-com.disqus.com/count.js" async></script>
-
-
-{% else %}
-请登录后评论
-<a href="/accounts/login/">登陆</a>
-<a href="/viclob/register/">注册</a>
-
-{% endif %}
-
 
 {% endblock %}

@@ -1,0 +1,8 @@
+{% load viclob_tags wagtailcore_tags %}
+
+<ul class="dropdown-menu">
+    {# Include link to parent because the parent link is a drop down #}
+    {% for child in menuitems_children %}
+        <li class="{% if child.active %} active{% endif %}"><a href="{% pageurl child %}">{{ child.title }}</a></li>
+    {% endfor %}
+</ul>

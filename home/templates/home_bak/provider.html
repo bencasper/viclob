@@ -1,0 +1,77 @@
+{% extends "home/index_base.html" %}
+
+{% load viclob_tags wagtailcore_tags static %}
+{% load wagtailimages_tags %}
+
+
+{% block subnav %}
+<ul class="nav nav-list text-center">
+    {% for sub in provider_subs %}
+    <li class="{% if sub.active %} active{% endif %}"><a href="{%pageurl sub %}"> {{ sub.title}} </a></li>
+    {% endfor %}
+</ul>
+{% endblock %}
+
+
+{% block list %}
+
+<div class="col-lg-9">
+
+    {% for provider in self.providers.all %}
+
+    <table>
+        <tr>
+            <td width="30%">
+                {% image provider.logo width-200 height-100%}
+
+            </td>
+            <td>
+                <div>
+                    <small>主要产品：</small>
+                    {{ provider.products | richtext }}
+
+                </div>
+                <div>
+                    <small>客户方向：</small>
+                    {{ provider.customers | richtext}}
+                </div>
+            </td>
+    </table>
+
+    </td>
+    </tr>
+
+    </table>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+
+
+<script>
+
+$(function(){
+
+function activaTab(tab){
+    console.log(tab)
+    $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+};
+
+activaTab('manager');
+
+
+})
+
+
+
+
+
+
+
+
+
+
+</script>
+
+{% endblock %}

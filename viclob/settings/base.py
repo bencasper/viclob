@@ -116,6 +116,8 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
+
+ALLOWED_HOSTS = [u'120.27.49.245', u'www.viclob.com', u'viclob.com']
 # LANGUAGE_CODE = 'en-us'
 
 # TIME_ZONE = 'UTC'

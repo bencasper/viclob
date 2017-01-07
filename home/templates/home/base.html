@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 {% load viclob_tags wagtailcore_tags static %}
+
+{% get_site_root as site_root %}
+{% get_home_page as homepage %}
+{% get_current_user as user%}
+
 <!--[if lt IE 7]>
 <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>
@@ -7,98 +12,47 @@
 <!--[if IE 8]>
 <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
+<html lang="zh-CN"> <!--<![endif]-->
 <head>
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <title>VICLOB</title>
-    <link rel="shortcut icon" href="{% static 'images/favicon-test.ico' %}"/>
-    <meta name="description" content=""/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
-    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css'%}"/>
-    <link rel="stylesheet" href="{% static 'css/viclob.css' %}">
-
-    {% block extra_css %}
-
-    {% endblock %}
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <title>云途VDP</title>
+    <meta name="Keywords" content=""/>
+    <meta name="Description" content=""/>
+    <link rel="stylesheet" href="{% static 'css/core.css' %}">
 </head>
 
-<body {% block body-class %} {% endblock %}>
+<body>
 
-{% block body %}
-<div id="wrap">
-    <div id="main" class="container clear-top">
-        {% block menu %}
+    <!--header/s-->
+    <header class="vdp-header">
+
         {% get_site_root as site_root %}
         {% top_menu parent=site_root calling_page=self %}
-        {% endblock %}
+        
+    </header>
+    <!--header/e-->
+
+{% block content %}
+
+{% endblock %}
 
 
-        {% block content %}{% endblock %}
-
-
-        {% block comment %}{% endblock %}
-
-
-    </div>
-
-</div>
-
-
-{% block footer %}
-<!-- Footer -->
-<footer class="footer">
-    {% block share %}
-    <div class="row">
-        <!-- JiaThis Button BEGIN -->
-        <div id="ckepop" style="float:right;padding-right:10%">
-            <span class="jiathis_txt">分享到：</span>
-            <a class="jiathis_button_weixin">微信</a>
-            <a href="http://www.jiathis.com/share"
-               class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis"
-               target="_blank">更多</a>
-            <a class="jiathis_counter_style"></a>
-        </div>
-        <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1" charset="utf-8"></script>
-        <!-- JiaThis Button END -->
-    </div>
-    {% endblock %}
-    <div class="row">
-
-        <div class="col-lg-12 text-center">
-            <ul class="list-unstyled">
-                <li>盛视云途网络技术(北京)有限公司</li>
-                <li>Vi-Time Networking Technology CO.,Ltd</li>
-                <li>Copyright &copy; Your Website 2014</li>
-            </ul>
-        </div>
-    </div>
+<!--foot/s-->
+<footer class="vdp-foot">
+    <div class="vdp-con">京公网安备 11010802022756号 京ICP备16065008号</div> 
 </footer>
+<!--foot/e-->
 
-{% endblock %}
-{% endblock %}
+
 
 </body>
 
-<script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'js/viclob.js' %}"></script>
 
-{% block extra_js %}
+{% block js %}
 
 {% endblock %}
-<!-- Script to Activate the Carousel -->
-<script>
-    $('.carousel').carousel({
-        interval: 5000 //changes the speed
-    })
-
-
-
-
-
-</script>
 
 </html>
 

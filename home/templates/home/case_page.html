@@ -8,16 +8,133 @@
 
 
 {% block content %}
-<div class="row text-center">
-    <h2>合作客户</h2>
-    <div class="col-lg-12 hline"></div>
-    <div class="col-lg-10">
-        {% for partner in self.carousel_items.all %}
-                {% image partner.image width-300 height-400%}
-        {% endfor %}
-    </div>
 
+<!--con /s-->
+	<div class="vdp-contain vdp-contain-bg">
+		<div class="vdp-con vdp-case">
+			<h3 class="dvp-title02">合作案例</h3>
+			<p class="txt">下面的小伙伴都在用云途VDP，期待你的加入。</p>
+			<div class="parter">
+				<span class="p-btn-l arrow-l-big"></span>
+				<span class="p-btn-r arrow-r-big"></span>
+				<div class="swiper-container01">
+					<ul class="swiper-wrapper clearfix">
+						<li class="swiper-slide">
+							<p class="name">美拍</p>
+							<div class="cp-logo"><img src="{% static 'images/meipai.gif' %}"></div>
+						</li>
+						<li  class="swiper-slide">
+							<p class="name">酷六</p>
+							<div class="cp-logo"><img src="{% static 'images/ku6.gif' %}"></div>
+						</li>
+						<li class="swiper-slide">
+							<p class="name">爱奇艺</p>
+							<div class="cp-logo"><img src="{% static 'images/iqiyi.gif' %}"></div>
+						</li>
+						<li class="swiper-slide">
+							<p class="name">乐视TV</p>
+							<div class="cp-logo"><img src="{% static 'images/letv.gif' %}"></div>
+						</li>
+						<li class="swiper-slide">
+							<p class="name">UC云观</p>
+							<div class="cp-logo"><img src="{% static 'images/uc.gif' %}"></div>
+						</li>
+						<li class="swiper-slide">
+							<p class="name">乐视TV</p>
+							<div class="cp-logo"><img src="{% static 'images/letv.gif' %}"></div>
+						</li>
+						<li class="swiper-slide">
+							<p class="name">UC云观</p>
+							<div class="cp-logo"><img src="{% static 'images/uc.gif' %}"></div>
+						</li>
+						<li class="swiper-slide">
+							<p class="name">乐视TV</p>
+							<div class="cp-logo"><img src="{% static 'images/letv.gif' %}"></div>
+						</li>
+						<li class="swiper-slide">
+							<p class="name">UC云观</p>
+							<div class="cp-logo"><img src="{% static 'images/uc.gif' %}"></div>
+						</li>
+					</ul>
+				</div>
+				<div class="cp-introduce">
+					<div class="dbox">
+						<span class="arrow"></span>
+						<p>美拍-1这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，</p>
+					</div>
+					<div class="dbox vdp-hide">
+						<span class="arrow"></span>
+						<p>酷6-2这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，</p>
+					</div>
+					<div class="dbox vdp-hide">
+						<span class="arrow"></span>
+						<p>爱奇艺-3这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，</p>
+					</div>
+					<div class="dbox vdp-hide">
+						<span class="arrow"></span>
+						<p>乐视tv-4这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，</p>
+					</div>
+					<div class="dbox vdp-hide">
+						<span class="arrow"></span>
+						<p>uc云观-5这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，</p>
+					</div>
+					<div class="dbox vdp-hide">
+						<span class="arrow"></span>
+						<p>乐视tv-6这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，</p>
+					</div>
+					<div class="dbox vdp-hide">
+						<span class="arrow"></span>
+						<p>uc云观-7这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，</p>
+					</div>
+					<div class="dbox vdp-hide">
+						<span class="arrow"></span>
+						<p>乐视tv-8这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，</p>
+					</div>
+					<div class="dbox vdp-hide">
+						<span class="arrow"></span>
+						<p>uc云观-9这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，这里是合作伙伴的文字介绍，文字介绍哦，可以随便写的，不过展示文字是有限的哦，</p>
+					</div>
+				</div>
+			</div>
+			<div class="case">
+				<h4 class="title">案例展示</h4>
+				<span class="btn-l arrow-l-small"></span>
+				<span class="btn-r arrow-r-small"></span>
+				<div class="swiper-container02">
+					<div class="swiper-wrapper clearfix">
+						<div class="swiper-slide clearfix">
+							<div class="video-box">
+<iframe frameborder="0" width="350" height="236" src="https://v.qq.com/iframe/player.html?vid=p0352ihaoo2&tiny=0&auto=0" allowfullscreen></iframe>
+							</div>
+							<div class="video-box">
+<iframe frameborder="0" width="350" height="236" src="https://v.qq.com/iframe/player.html?vid=p0352ihaoo2&tiny=0&auto=0" allowfullscreen></iframe>
+							</div>
+							<div class="video-box">
+<iframe frameborder="0" width="350" height="236" src="https://v.qq.com/iframe/player.html?vid=p0352ihaoo2&tiny=0&auto=0" allowfullscreen></iframe>
 </div>
-
+							<div class="video-box"><img src="{% static 'images/img04.jpg' %}"></div>
+							<div class="video-box"><img src="{% static 'images/img05.jpg' %}"></div>
+							<div class="video-box"><img src="{% static 'images/img01.jpg' %}"></div>
+						</div>
+						<div class="swiper-slide clearfix">
+							<div class="video-box"><img src="{% static 'images/img02.jpg' %}"></div>
+							<div class="video-box"><img src="{% static 'images/img01.jpg' %}"></div>
+							<div class="video-box"><img src="{% static 'images/img05.jpg' %}"></div>
+							<div class="video-box"><img src="{% static 'images/img04.jpg' %}"></div>
+							<div class="video-box"><img src="{% static 'images/img05.jpg' %}"></div>
+							<div class="video-box"><img src="{% static 'images/img03.jpg' %}"></div>
+						</div>
+					</div>
+				</div>
+		    </div>
+		</div>
+	</div>
+	<!--con /e-->
 
 {% endblock%}
+
+{% block js %}
+	<script src="{% static 'js/libs/jquery.min.js' %}"></script>
+	<script src="{% static 'js/plugs/swiper.jquery.min.js' %}"></script>
+	<script src="{% static 'js/projects/case.js' %}"></script>
+{% endblock %}

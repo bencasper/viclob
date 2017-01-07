@@ -1,0 +1,23 @@
+{% extends "home/base.html" %}
+
+{% load viclob_tags wagtailcore_tags static %}
+
+{% load wagtailimages_tags %}
+
+<!--{% load static wagtailuserbar %}-->
+
+
+{% block content %}
+<div class="row text-center">
+    <h2>合作客户</h2>
+    <div class="col-lg-12 hline"></div>
+    <div class="col-lg-10">
+        {% for partner in self.carousel_items.all %}
+                {% image partner.image width-300 height-400%}
+        {% endfor %}
+    </div>
+
+</div>
+
+
+{% endblock%}

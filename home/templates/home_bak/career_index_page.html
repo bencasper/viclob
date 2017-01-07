@@ -1,0 +1,212 @@
+{% extends "home/index_base.html" %}
+
+{% load viclob_tags wagtailcore_tags static %}
+{% load wagtailimages_tags %}
+
+
+{% block list %}
+
+<div class="col-lg-9">
+    <ul class="nav nav-tabs">
+        {% for career in self.careerTypes %}
+        <li><a href="#{{ career.key }}" data-toggle="tab">{{ career.value }}</a></li>
+        {% endfor %}
+    </ul>
+    <div class="tab-content" id="tabs">
+
+        {% for career in self.careerTypes %}
+        <div class="tab-pane" id="{{ career.key }}">
+
+            {% if career.key == 'manager' %}
+            {% for manager in self.manager_items.all %}
+            <div class="row">
+                <div class="col-lg-7">
+                    {{ manager.name }}
+                    <small>{{ manager.title}}</small>
+
+                    <br>
+
+                    {{ manager.content | richtext }}
+                </div>
+                <div class="col-log-5">
+                    {% image manager.image width-400 height-300%}
+                </div>
+            </div>
+
+            {% endfor%}
+            {% elif career.key == 'seller' %}
+            {% for manager in self.seller_items.all %}
+            <div class="row">
+                <div class="col-lg-7">
+                    {{ manager.name }}
+                    <small>{{ manager.title}}</small>
+
+                    <br>
+
+                    {{ manager.content | richtext }}
+                </div>
+                <div class="col-log-5">
+                    {% image manager.image width-400 height-300%}
+
+                </div>
+            </div>
+
+            {% endfor%}
+            {% elif career.key == 'market'%}
+            {% for manager in self.market_items.all %}
+            <div class="row">
+                <div class="col-lg-7">
+                    {{ manager.name }}
+                    <small>{{ manager.title}}</small>
+
+                    <br>
+
+                    {{ manager.content | richtext }}
+                </div>
+                <div class="col-log-5">
+                    {% image manager.image width-400 height-300%}
+
+                </div>
+            </div>
+
+            {% endfor%}
+            {% elif career.key == 'provider'%}
+            {% for manager in self.provider_items.all %}
+            <div class="row">
+                <div class="col-lg-7">
+                    {{ manager.name }}
+                    <small>{{ manager.title}}</small>
+
+                    <br>
+
+                    {{ manager.content | richtext }}
+                </div>
+                <div class="col-log-5">
+                    {% image manager.image width-400 height-300%}
+
+                </div>
+            </div>
+
+            {% endfor%}
+            {% elif career.key == 'product'%}
+            {% for manager in self.product_items.all %}
+            <div class="row">
+                <div class="col-lg-7">
+                    {{ manager.name }}
+                    <small>{{ manager.title}}</small>
+
+                    <br>
+
+                    {{ manager.content | richtext }}
+                </div>
+                <div class="col-log-5">
+                    {% image manager.image width-400 height-300%}
+
+                </div>
+            </div>
+
+            {% endfor%}
+            {% elif career.key == 'test'%}
+            {% for manager in self.test_items.all %}
+            <div class="row">
+                <div class="col-lg-7">
+                    {{ manager.name }}
+                    <small>{{ manager.title}}</small>
+
+                    <br>
+
+                    {{ manager.content | richtext }}
+                </div>
+                <div class="col-log-5">
+                    {% image manager.image width-400 height-300%}
+
+                </div>
+            </div>
+
+            {% endfor%}
+            {% elif career.key == 'dev'%}
+            {% for manager in self.dev_items.all %}
+            <div class="row">
+                <div class="col-lg-7">
+                    {{ manager.name }}
+                    <small>{{ manager.title}}</small>
+
+                    <br>
+
+                    {{ manager.content | richtext }}
+                </div>
+                <div class="col-log-5">
+                    {% image manager.image width-400 height-300%}
+
+                </div>
+            </div>
+
+            {% endfor%}
+            {% elif career.key == 'keep'%}
+            {% for manager in self.keep_items.all %}
+            <div class="row">
+                <div class="col-lg-7">
+                    {{ manager.name }}
+                    <small>{{ manager.title}}</small>
+
+                    <br>
+
+                    {{ manager.content | richtext }}
+                </div>
+                <div class="col-log-5">
+                    {% image manager.image width-400 height-300%}
+
+                </div>
+            </div>
+
+            {% endfor%}
+            {% endif %}
+        </div>
+        {% endfor %}
+
+
+    </div>
+     <!--<div class="row">  合作伙伴 </div>-->
+     <!--<div class="row">-->
+        <!--<div class="col-lg-3">-->
+                <!--debug-->
+        <!--</div>-->
+        <!--<div class="col-lg-3">-->
+                <!--debug-->
+        <!--</div>-->
+        <!--<div class="col-lg-3">-->
+                <!--debug-->
+        <!--</div>-->
+         <!--<div class="col-lg-3">-->
+                <!--debug-->
+        <!--</div>-->
+
+    <!--</div>-->
+</div>
+
+
+{% endblock %}
+
+{% block extra_js %}
+
+
+<script>
+
+$(function(){
+
+function activaTab(tab){
+    console.log(tab)
+    $('.nav-tabs a[href="#' + tab + '"]').tab('show');
+};
+
+activaTab('manager');
+
+
+})
+
+
+
+
+</script>
+
+{% endblock %}
