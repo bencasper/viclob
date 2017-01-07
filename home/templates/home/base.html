@@ -14,7 +14,7 @@
 <!--[if gt IE 8]><!-->
 <html lang="zh-CN"> <!--<![endif]-->
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="renderer" content="webkit">
     <title>云途VDP</title>
@@ -25,14 +25,14 @@
 
 <body>
 
-    <!--header/s-->
-    <header class="vdp-header">
+<!--header/s-->
+<header class="vdp-header">
 
-        {% get_site_root as site_root %}
-        {% top_menu parent=site_root calling_page=self %}
-        
-    </header>
-    <!--header/e-->
+    {% get_site_root as site_root %}
+    {% top_menu parent=site_root calling_page=self %}
+
+</header>
+<!--header/e-->
 
 {% block content %}
 
@@ -41,10 +41,19 @@
 
 <!--foot/s-->
 <footer class="vdp-foot">
-    <div class="vdp-con">京公网安备 11010802022756号 京ICP备16065008号</div> 
+    <dl class="txt vdp-con clearfix">
+        <dt class="text">
+        <div>Copyright © 2017 云途VDP Inc.</div>
+        <div>京公网安备<span class="pl-10 pr-10">11010802022756</span>号京 ICP 备<span class="pl-10 pr-10">16065008</span>号
+        </div>
+        </dt>
+        <dd class="share">
+            <span class="ewm"><img src="{% static 'images/ewm.jpg' %}" alt=""></span>
+            <p>微博二维码</p>
+        </dd>
+    </dl>
 </footer>
 <!--foot/e-->
-
 
 
 </body>

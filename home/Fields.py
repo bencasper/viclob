@@ -53,6 +53,7 @@ class LinkFields(models.Model):
 
 class ContactFields(models.Model):
     telephone = models.CharField(verbose_name=u'电话', max_length=20, blank=True)
+    telephone2 = models.CharField(verbose_name=u'电话2', max_length=20, blank=True)
     email = models.EmailField(blank=True)
     wechat = models.CharField(verbose_name=u'微信', max_length=255, blank=True)
     address_1 = models.CharField(verbose_name=u'地址', max_length=255, blank=True)
@@ -64,6 +65,7 @@ class ContactFields(models.Model):
         FieldPanel('city'),
         FieldPanel('address_1'),
         FieldPanel('telephone'),
+        FieldPanel('telephone2'),
         FieldPanel('email'),
         FieldPanel('wechat'),
 

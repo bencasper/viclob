@@ -525,6 +525,7 @@ class FAQIndexPage(IndexPage):
 class ContactPage(MenuPage):
     body = RichTextField(verbose_name='简介', blank=True)
     telephone = models.CharField(verbose_name=u'电话', max_length=20, blank=True)
+    telephone2 = models.CharField(verbose_name=u'电话2', max_length=20, blank=True)
     email = models.EmailField(blank=True)
     wechat = models.CharField(verbose_name=u'微信', max_length=255, blank=True)
     address = models.CharField(verbose_name=u'地址', max_length=255, blank=True)
@@ -550,6 +551,7 @@ ContactPage.content_panels = [
     FieldPanel('menu_priority'),
     FieldPanel('body', classname="full"),
     FieldPanel('telephone', classname='full'),
+    FieldPanel('telephone2', classname='full'),
     FieldPanel('email', classname='full'),
     FieldPanel('wechat', classname='full'),
     FieldPanel('address', classname='full'),
