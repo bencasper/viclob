@@ -3,10 +3,11 @@
 from django.db import models
 from django import forms
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, MultiFieldPanel, \
-    PageChooserPanel
+    PageChooserPanel, StreamFieldPanel
+from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.blocks import StreamBlock, CharBlock, RichTextBlock, StructBlock, TextBlock, FieldBlock, \
     RawHTMLBlock
-from wagtail.wagtailcore.fields import RichTextField
+from wagtail.wagtailcore.fields import RichTextField, StreamField
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
@@ -97,6 +98,28 @@ class CarouselItem(LinkFields):
         abstract = True
 
 
+# case
+class CaseItem(LinkFields):
+    logo = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    intro = models.CharField(verbose_name=u'简介', max_length=255, blank=True);
+    title = models.CharField(verbose_name=u'名称', max_length=255, blank=True)
+
+    panels = [
+        FieldPanel('title'),
+        ImageChooserPanel('logo'),
+        FieldPanel('intro'),
+    ]
+
+    class Meta:
+        abstract = True
+
+
 # # video items
 # class VideoItem(LinkFields):
 #     image = models.ForeignKey(
@@ -143,7 +166,6 @@ class ProviderItem(models.Model):
 
     class Meta:
         abstract = True
-
 
 
 # Global Streamfield definition
@@ -233,21 +255,15 @@ class TopicItem(models.Model):
 
 class VideoItem(models.Model):
     title = models.CharField(verbose_name=u'视频名称', max_length=255)
-    # content = RichTextField(verbose_name=u'视频内容', blank=True)
-    url = models.URLField(verbose_name=u'视频链接地址', blank=True)
-    image = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=False,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
+    code = RichTextField(verbose_name=u'视频代码', max_length=255)
+
+    code = StreamField([
+        ('code', blocks.RawHTMLBlock()),
+    ])
 
     panels = [
         FieldPanel('title'),
-        FieldPanel('content', classname='full'),
-        FieldPanel('url'),
-        ImageChooserPanel('image'),
+        StreamFieldPanel('code'),
 
     ]
 

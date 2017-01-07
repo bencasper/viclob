@@ -25,6 +25,9 @@ $(function(){
                 var liNum = _this.index();
                 _this.addClass("swiper-slide-active");
                 _this.siblings().removeClass("swiper-slide-active");
+                var intro = $('.swiper-slide-active span').text()
+                console.log(intro)
+                $('.dbox p').text(intro)
                 _this.siblings().removeClass("swiper-slide-next");
                 _this.siblings().removeClass("swiper-slide-prev");
                 _this.prev().addClass("swiper-slide-prev");

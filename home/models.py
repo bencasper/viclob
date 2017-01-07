@@ -68,19 +68,15 @@ class SolutionPage(MenuPage):
 
 
 # case page
-class CasePageCarouselItem(Orderable, CarouselItem):
-    page = ParentalKey('home.CasePage', related_name='carousel_items')
+class CasePageCaseItem(Orderable, CaseItem):
+    page = ParentalKey('home.CasePage', related_name='case_items')
+
+
+class CasePageVideoItem(Orderable, VideoItem):
+    page = ParentalKey('home.CasePage', related_name='case_videos')
 
 
 class CasePage(MenuPage):
-    co = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-
     class Meta:
         verbose_name = u'案例页面'
 
@@ -88,8 +84,8 @@ class CasePage(MenuPage):
 CasePage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('menu_priority'),
-    ImageChooserPanel('co'),
-    InlinePanel('carousel_items', label=u"合作客户"),
+    InlinePanel('case_items', label=u"合作案例"),
+    InlinePanel('case_videos', label=u"案例展示"),
 ]
 
 INDEX_TYPES = ((0, u'请选择首页类型'),)
