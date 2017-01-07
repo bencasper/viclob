@@ -37,38 +37,48 @@
                 </div>
             </div>
         </div>
-        <!--case/s-->
-        <div class="bg-white">
-            <div class="vdp-con vdp-case">
-                <div class="case">
+    </div>
+</div>
+<!--case/s-->
+<div class="bg-white">
+    <div class="vdp-con vdp-case">
+        <div class="case">
 
-                    <h4 class="title">部分案例</h4>
-                    <span class="btn-l arrow-l-small"></span>
-                    <span class="btn-r arrow-r-small"></span>
-                    <div class="swiper-container02">
-                        <div class="swiper-wrapper clearfix">
-                            <div class="swiper-slide clearfix">
-                                {% for videoItem in self.case_videos.all %}
-                                <div class="video-box">
-                                    <div class="video">
-                                        {{ videoItem.code }}
-                                    </div>
-                                    <div class="name">
-                                        {{ videoItem.title }}
-                                    </div>
-                                </div>
-                                {% endfor %}
+            <h4 class="title">部分案例</h4>
+            <span class="btn-l arrow-l-small"></span>
+            <span class="btn-r arrow-r-small"></span>
+            <div class="swiper-container02">
+                <div class="swiper-wrapper clearfix">
+                    <div class="swiper-slide clearfix">
+                        {% for videoItem in self.case_videos.all %}
+                        <div class="video-box">
+                            <div class="video">
+                                {{ videoItem.code }}
                             </div>
-                            <div class="swiper-slide clearfix">
-
+                            <div class="name">
+                                {{ videoItem.title }}
                             </div>
                         </div>
+                        {% endfor %}
+                    </div>
+                    <div class="swiper-slide clearfix">
+                        {% for videoItem in self.case2_videos.all %}
+                        <div class="video-box">
+                            <div class="video">
+                                {{ videoItem.code }}
+                            </div>
+                            <div class="name">
+                                {{ videoItem.title }}
+                            </div>
+                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <!--con /e-->
 
 {% endblock%}
@@ -92,12 +102,14 @@
         setTimeout(function(){
             $('.btn-r').trigger('click')
 
-        }, 1000)
+        }, 3000)
 
 
 
 
     })
+
+
 
 
 </script>

@@ -76,6 +76,9 @@ class CasePageCaseItem(Orderable, CaseItem):
 class CasePageVideoItem(Orderable, VideoItem):
     page = ParentalKey('home.CasePage', related_name='case_videos')
 
+class CasePageVideo2Item(Orderable, VideoItem):
+    page = ParentalKey('home.CasePage', related_name='case2_videos')
+
 
 class CasePage(MenuPage):
     class Meta:
@@ -86,7 +89,8 @@ CasePage.content_panels = [
     FieldPanel('title', classname="full title"),
     FieldPanel('menu_priority'),
     InlinePanel('case_items', label=u"合作案例"),
-    InlinePanel('case_videos', label=u"案例展示"),
+    InlinePanel('case_videos', label=u"案例展示第一排"),
+    InlinePanel('case2_videos', label=u"案例展示第二排"),
 ]
 
 INDEX_TYPES = ((0, u'请选择首页类型'),)
