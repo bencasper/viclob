@@ -26,6 +26,7 @@ $(function(){
                 _this.addClass("swiper-slide-active");
                 _this.siblings().removeClass("swiper-slide-active");
                 var intro = $('.swiper-slide-active span').text()
+                intro = '云途VDP全网发行客户内容累计播放&阅读量已超过20,000,000人/次'
                 console.log(intro)
                 $('.dbox p').text(intro)
                 _this.siblings().removeClass("swiper-slide-next");
