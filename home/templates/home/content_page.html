@@ -2,9 +2,10 @@
 {% load viclob_tags wagtailcore_tags %}
 {% get_current_user as user%}
 
-<% block title %>
+{% block title %}
 <title>{{ self.title }}</title>
-<% endblock %>
+{% endblock %}
+
 {% block content %}
 
 {% if self.body %}
