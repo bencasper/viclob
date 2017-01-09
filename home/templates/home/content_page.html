@@ -2,13 +2,15 @@
 {% load viclob_tags wagtailcore_tags %}
 {% get_current_user as user%}
 
-
+<% block title %>
+<title>{{ self.title }}</title>
+<% endblock %>
 {% block content %}
 
 {% if self.body %}
 <!--con /s-->
 <div class="vdp-contain vdp-contain-info">
-        {% include "home/include/streamfield.html" with content=self.body %}
+    {% include "home/include/streamfield.html" with content=self.body %}
 </div>
 <!--con /e-->
 {% endif %}
