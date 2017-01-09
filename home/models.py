@@ -102,8 +102,8 @@ class CasePage(MenuPage):
                 contents.append(sublist)
                 sublist = []
                 count = 0
-
-        contents.append(sublist)
+        if len(sublist) > 0:
+            contents.append(sublist)
         return contents
 
     class Meta:
