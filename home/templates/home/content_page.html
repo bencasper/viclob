@@ -9,7 +9,7 @@
 {% block desc %}
 <meta name="Description" content="{% for child in self.body %}
                                     {% if child.block_type == 'intro' %}
-                                        {{ child }}
+                                        {{ child.value.source }}
                                     {% endif %}
                                   {% endfor %}"/>
 {% endblock %}
