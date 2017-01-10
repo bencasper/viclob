@@ -6,6 +6,10 @@
 <title>{{ self.title }} - 云途VDP</title>
 {% endblock %}
 
+{% block desc %}
+<meta name="Description" content="{{ self.intro }}"/>
+{% endblock %}
+
 {% block content %}
 
 {% if self.body %}
