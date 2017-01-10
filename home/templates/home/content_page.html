@@ -7,7 +7,11 @@
 {% endblock %}
 
 {% block desc %}
-<meta name="Description" content="{{ self.intro }}"/>
+<meta name="Description" content="{% for child in content.body %}
+                                    {% if child.block_type == 'intro' %}
+                                        {{ child }}
+                                    {% endif %}
+                                  {% endfor %}"/>
 {% endblock %}
 
 {% block content %}
