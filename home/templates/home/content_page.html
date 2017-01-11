@@ -22,49 +22,35 @@
 
 {% block js %}
 
-<script>
-    var descContent = '{% for child in self.body %}
-                       {% if child.block_type == 'intro' %}
-                       {{ child.value.source }}
-                       {% endif %}
-                       {% endfor %}';
+<!--<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>-->
 
-    function shareFriend() {
-        WeixinJSBridge.invoke('sendAppMessage',{
-            "desc": descContent,
-        }, function(res) {
-            //_report('send_msg', res.err_msg);
-        })
-    }
-    function shareTimeline() {
-        WeixinJSBridge.invoke('shareTimeline',{
-            "desc": descContent,
-        }, function(res) {
-               //_report('timeline', res.err_msg);
-        });
-    }
-    function shareWeibo() {
-        WeixinJSBridge.invoke('shareWeibo',{
-            "content": descContent,
-        }, function(res) {
-            //_report('weibo', res.err_msg);
-        });
-    }
-    // 当微信内置浏览器完成内部初始化后会触发WeixinJSBridgeReady事件。
-    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
-        // 发送给好友
-        WeixinJSBridge.on('menu:share:appmessage', function(argv){
-            shareFriend();
-        });
-        // 分享到朋友圈
-        WeixinJSBridge.on('menu:share:timeline', function(argv){
-            shareTimeline();
-        });
-        // 分享到微博
-        WeixinJSBridge.on('menu:share:weibo', function(argv){
-            shareWeibo();
-        });
-    }, false);
+<!--<script>-->
 
-</script>
+    <!--wx.config({-->
+        <!--debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。-->
+        <!--appId: 'wxf523e372393174d2', // 必填，公众号的唯一标识-->
+        <!--timestamp: 1484106342, // 必填，生成签名的时间戳-->
+        <!--nonceStr: 'Wm3WZYTPz0wzccnW', // 必填，生成签名的随机串-->
+        <!--signature: 'abc0aed4614bfb7c6b8805a00939a6a59890ee2f',// 必填，签名，见附录1-->
+        <!--jsApiList: ['onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2-->
+    <!--});-->
+    <!--var descContent = '';-->
+
+    <!--wx.onMenuShareAppMessage({-->
+    <!--title: '', // 分享标题-->
+    <!--desc: descContent, // 分享描述-->
+    <!--link: '', // 分享链接-->
+    <!--imgUrl: '', // 分享图标-->
+    <!--type: '', // 分享类型,music、video或link，不填默认为link-->
+    <!--dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空-->
+    <!--success: function () {-->
+        <!--// 用户确认分享后执行的回调函数-->
+    <!--},-->
+    <!--cancel: function () {-->
+        <!--// 用户取消分享后执行的回调函数-->
+    <!--}-->
+    <!--});-->
+
+
+<!--</script>-->
 {% endblock %}
